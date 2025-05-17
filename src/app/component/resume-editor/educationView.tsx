@@ -1,0 +1,58 @@
+export default function EducationView({ data }: { data: any[] }) {
+	return (
+		<div className="space-y-6">
+			<h2 className="text-xl font-semibold">Education</h2>
+			{data.map((edu, index) => (
+				<div key={index} className="border-b pb-4 last:border-b-0">
+					<div className="flex justify-between">
+						<h3 className="font-medium">
+							{edu.degree} in {edu.major}
+						</h3>
+						<span>
+							{edu.startDate && `${edu.startDate} - `}
+							{edu.completed
+								? edu.graduationDate || edu.endDate
+								: "In Progress"}
+						</span>
+					</div>
+					<p>
+						{edu.university} • {edu.location}
+					</p>
+					{edu.institutionType && (
+						<p className="text-sm text-gray-500">{edu.institutionType}</p>
+					)}
+
+					{edu.gpa && <p className="mt-1">GPA: {edu.gpa}</p>}
+					{edu.honors && <p className="mt-1">Honors: {edu.honors}</p>}
+
+					{edu.relevantCourses && edu.relevantCourses.length > 0 && (
+						<div className="mt-2">
+							<p className="font-medium">Relevant Courses:</p>
+							<div className="flex flex-wrap gap-2 mt-1">
+								{edu.relevantCourses.map((course: string, i: number) => (
+									<span
+										key={i}
+										className="bg-gray-100 px-2 py-1 rounded text-sm"
+									>
+										{course}
+									</span>
+								))}
+							</div>
+						</div>
+					)}
+
+					{edu.keyLearnings && edu.keyLearnings.length > 0 && (
+						<div className="mt-2">
+							<p className="font-medium">Key Learnings:</p>
+							<ul className="list-disc pl-5 mt-1">
+								{edu.keyLearnings.map((learning: string, i: number) => (
+									<li key={i}>{learning}</li>
+								))}
+							</ul>
+						</div>
+					)}
+				</div>
+			))}
+		</div>
+	);
+}

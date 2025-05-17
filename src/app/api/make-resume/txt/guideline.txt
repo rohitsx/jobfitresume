@@ -1,0 +1,400 @@
+Resume Writing Guide
+Welcome to the r/Resumes Resume Writing Guide! We've created this resource to help you navigate the often-confusing world of resume creation.
+
+Remember, there's no single "perfect" resume. The ideal resume for you will depend on your unique background, the industry you're targeting, your level of experience, and your specific career goals. However, this guide is packed with best practices and tips that apply to many situations.
+
+Think of this as your starting point. Use the information here as a foundation, and then tailor your resume to fit your individual needs.
+
+Building a Professional-Looking Resume
+Where to Begin?
+Don't feel overwhelmed if you're creating your first resume. There are plenty of resources to help you get started:
+
+Templates:
+
+Benefit: A great way to save time and ensure a clean, organized format. Countless templates are available online – choose one that's easy to read and edit.
+
+Our Recommendation: Check out this simple and effective template to get you started. If you more options and flexibility (a paid option mind you), you can also try this.
+
+A Word of Caution: Don't get too attached to any one template. No template is perfect for every situation. Use templates as a starting point and be prepared to adapt them based on feedback you receive in this subreddit.
+
+Online Services:
+
+There are a ton of online services that can help you if you're stuck.
+
+Resume Builders: Can help you create a resume with pre-written content and formatting options.
+
+Resume Writers: Offer personalized assistance with crafting and editing your resume.
+
+Important Note: Be cautious when using these services. Some may not be reputable and could produce subpar results. Always research any service thoroughly before using it. Check out this example of a cautionary tale to see why due diligence is important.
+
+Remember: The most important aspect of your resume is the content. Focus on highlighting your skills, experience, and accomplishments in a clear and concise way.
+
+What to do if you have little or no experience.
+Continue further down to the section titled 'Building and Formatting a Resume with Little to No Work Experience'.
+
+Do I need a cover letter?
+The role of cover letters in today's job market is a topic of debate. While some recruiters still value them, others may not have the time to read them, especially when dealing with a large volume of applications.
+
+Here's the bottom line:
+
+Cover letters aren't always necessary: If a job posting doesn't specifically request a cover letter, you can often omit it.
+
+When to include one: Always provide a cover letter if the job posting asks for one. Additionally, consider writing a cover letter if:
+
+You want to add context to your resume that doesn't fit within the resume format.
+You're applying for a particularly competitive position.
+You have a personal connection to the company or someone who works there.
+Writing a Strong Cover Letter:
+
+If you do write a cover letter, keep it concise and focused. Aim to achieve these three key goals:
+
+Introduce yourself: Briefly state your name and the position you're applying for.
+Summarize your background: Highlight relevant experience and skills that align with the job requirements.
+Showcase your value: Explain why you're the ideal candidate and what unique qualifications you bring to the table.
+Additional Tips:
+
+Read the job posting carefully: Follow any specific instructions regarding cover letters.
+Email Applications: If you're applying via email, the body of your email serves as a brief introduction, not a full cover letter. Attach your formatted cover letter as a separate document.
+Summary Section
+Instead of a traditional objective statement, consider using a resume summary or brand statement. This concise snapshot (aim for 60-100 words) serves as your elevator pitch, quickly conveying your value to potential employers.
+
+Why a Resume Summary?
+
+Not always required: If you've included a cover letter, your summary might be redundant.
+Valuable for quickly grabbing attention and highlighting your most relevant qualifications, as well as filling the gap if you're not submitting a cover letter.
+Writing an Effective Summary
+
+Focus on:
+
+Who you are and what you do: Clearly state your professional identity and area of expertise. Make sure this aligns with the job you're applying for.
+
+Your achievements: Highlight your most impressive accomplishments that are relevant to the target role. Think about:
+
+Measurable results you've achieved (e.g., increased sales by X%, reduced costs by Y%).
+Awards, recognition, or promotions you've received.
+Problems you've solved or challenges you've overcome.
+Times you've exceeded expectations or gone above and beyond.
+Your goal is to demonstrate that you're not only skilled and experienced, but that you have a proven track record of delivering results.
+
+Work Experience
+This is the section of your resume in which you detail your career history. It’s here that you demonstrate that you have the relevant skills, experience and background for the job you are applying for. This is typically the longest section on your resume.
+
+How to describe your experience
+Incorporate bullets into your resume to improve skim value.
+
+For present roles, write in the simple present tense (i.e., practices, manages, performs)
+
+For past activities, write in the simple past tense (i.e., achieved, managed, performed).
+
+Include context for the position: What kind of company do you work for? What kind of products or services do they offer? What kind of customers do they work with (i.e., businesses, individuals)? Which industry do they operate in? How large are they (i.e., 10 locations? 100 locations? 500 personnel?).
+
+Describe how your work supports the company and their bottom line (i.e., which products do you support? What kind of customers do you support? Which business unit do you work for?)
+
+What are your main functions? Don't worry about including every tiny detail - focus on the things that occupy most of your time and/or the things that are relevant to your next job.
+
+Focus on how your work had an impact to the company's bottom line. This could take a variety of forms, such as:
+
+landing new clients,
+saving on costs,
+automating tasks and saving on manual hours,
+killing your sales targets,
+earning performance-related awards or praise from management, or
+successfully pulling off large-scale projects
+Bullet Point Structuring
+
+PAR (Problem-Action-Result): A common and widely used formula that's ideal for showing accomplishments, highlighting technical skills, and demonstrating problem-solving abilities. Use it when you want to emphasize the impact of your work and how you achieved results.
+
+Example #1: "Reduced customer support response time by 20% by implementing a new ticketing system and optimizing workflow processes."
+
+Example #2: "Overcame tight project deadlines by prioritizing tasks, coordinating resources, and effectively communicating with stakeholders."
+
+STAR (Situation-Task-Action-Result): This formula provides a more detailed narrative, making it suitable for behavioral interview questions and detailed job descriptions. It's great for demonstrating specific skills and competencies in context.
+
+Example #1: "Managed inventory levels and ensured product availability while minimizing stockouts in a fast paced retail setting; achieved a 15% reduction in inventory costs."
+
+Example #2: "Quickly diagnosed a server outage and implemented a temporary workaround, minimizing downtime for critical business operations and preventing thousands of dollars in associated losses."
+
+Result-First: This formula leads with the quantifiable outcome, immediately grabbing the reader's attention. It's effective when you have impressive results to showcase and want to make a strong impact.
+
+Example: "Increased sales revenue by 18% through targeted marketing campaigns and effective sales strategies."
+
+Action Verb + Skill + Result: Highlights the action taken, the skill applied, and the achieved result. It's concise and easy to read, and is commonly used for engineering/technical resumes.
+
+Example: "Developed a user-friendly website using HTML, CSS, and JavaScript, resulting in a 30% increase in website traffic."
+
+Start with your most recent experience and continue in reverse chronological order. Your most recent role should also contain the most bullet points and the length of each section can decrease as you work back through your career.
+
+Feature your most relevant bullet points first. For each job application, you should review what you have written so that you focus on the experience that is most relevant to the role you are applying for. Are there duties in the job description which you have performed in your previous roles? If so, make sure to include these examples at the top of each role in your experience section.
+
+DON'T DO THIS
+
+Use generic statements.
+
+Use repetitive terms, phrases, or sentences.
+
+Use overly fancy/flowery language. Simple is always better.
+
+What should I do about gap years or employment gaps?
+Gaps are something that a lot of job seekers struggle with. However, you always want to be transparent while protecting your privacy.
+
+Recruiters these days understand that life happens. Whether it's illness, leave of absence due to burnout, or children, these things can sometimes get in the way of your professional life.
+
+The key is to be honest about it. For example, if you took some time off due to illness and haven't worked since, simply include a line at the top of your experience section; where you'd normally list a job title, say something like "Personal leave of absence" along with the dates.
+
+I have held two positions at one company, how can I best show this?
+There are a few ways to handle this:
+
+If the roles are similar in scope (i.e., IT Specialist I and IT Specialist II) they can even be combined in a single title (IT Specialist).
+
+If the positions have some overlap, but are not exactly the same, choose the position name that you spent the most time as, that best reflects your qualifications, or that is simply the most relevant to your next job. You could even add a bullet that says something to the effect of "Promoted internally from sales associate to head of sales after three years".
+
+If the positions are entirely exclusive, list them as though you would list positions at different companies.
+
+The key here is to remain truthful while maintaining a certain level of simplicity. Never list a title that you didn't hold or that reflects responsibilities you didn't have (i.e., listing yourself as a team leader when you haven't actually led anyone).
+
+I have multiple non-consecutive terms or discontinuous work in one position, how can I best show this?
+If your work time is longer than the off-time, it can be ignored in favour of a single time range, using the typical start and end month/year.
+
+If you worked at a summer camp for four summers, a span of 3.5 years may not be the most representative of the time you were working. Instead, using "Summers 2010/11/12/13" is appropriate. If your discontinuous time slots are not so easily summed up, just remember that clarity takes precedence over accuracy, as long as you are not stretching the truth in your favour.
+
+Skills and Keywords
+Keywords are words or phrases found in the job posting and are important skills or competencies required to fulfill the role. Including them on your resume will enable you to rank higher in a recruiter search. This doesn't guarantee you'll get the job or the interview, but it will increase the likelihood that your resume will be seen first.
+
+Here are two great articles on ATS:
+
+Beating ATS
+
+Understanding ATS
+
+Technical Skills
+Technical skills on a resume showcase specific knowledge and expertise in using tools, software, hardware, or specialized processes within a particular field. They demonstrate your ability to perform job-specific tasks and are crucial for many positions, especially those in technology, engineering, science, and other technical fields.
+
+There are different types of technical skills, which can be broadly categorized as:
+
+Hard Technical Skills: These involve hands-on, practical knowledge of specific tools, software, hardware, or techniques. Examples include:
+
+Programming languages: Java, Python, C++, JavaScript, etc.
+Software applications: Microsoft Office Suite, Adobe Creative Suite, CAD software, project management software, etc.
+Operating systems: Windows, macOS, Linux
+Data analysis tools: SQL, R, SAS
+Networking protocols: TCP/IP, DNS, DHCP
+Cloud computing platforms: AWS, Azure, Google Cloud
+Specific technical processes: Machine learning, statistical analysis, web development
+Soft Technical Skills: These skills involve using technical knowledge to solve problems, analyze data, communicate effectively, and collaborate with others. Examples include:
+
+Troubleshooting: Identifying and resolving technical issues
+Data analysis: Collecting, processing, and interpreting data
+Project management: Planning, organizing, and executing technical projects
+Technical writing: Creating clear and concise technical documentation
+Presentation skills: Communicating technical information effectively to both technical and non-technical audiences
+When incorporating technical skills into resume bullet points, a common and effective structure to follow is the PAR (Problem-Action-Result) method:
+
+Problem (or Project): Briefly describe the challenge, project, or task you faced. This sets the context for your technical skill application.
+Action: Explain the specific actions you took to address the problem or complete the task. Highlight the technical skills you used and how you applied them.
+Result: Quantify the positive outcome or impact of your actions. Emphasize the results achieved through your technical skills, using numbers or percentages if possible.
+Here's an example of a PAR bullet point showcasing technical skills:
+
+Problem: Website traffic was declining due to slow page load times and poor user experience.
+Action: Implemented website optimization techniques, including image compression, code minification, and caching, using HTML, CSS, and JavaScript. Improved site navigation and mobile responsiveness.
+Result: Increased website traffic by 25% within three months, decreased page load time by 50%, and improved user engagement metrics by 15%.
+This structure effectively demonstrates your technical skills in a context that's meaningful to employers. It shows not only that you possess certain skills but also how you have successfully applied them to achieve tangible results.
+
+What about soft interpersonal skills?
+What are soft skills? They are terms that describe character traits, such as:
+
+Problem-solving
+Outgoing communicator
+Critical thinker
+Driven
+The problem with these terms is that they are so over-used that they have lost all value. Anybody can say that are "driven", but few can prove it. Accordingly, it's best to leave these skills off of your resume. They will be implied through well-written descriptions of your responsibilities and accomplishments.
+
+Ideally, your bullet points will highlight quantifiable achievements as opposed to responsibilities. That means specific accomplishments with metrics to back them up. It is more effective to tell the reader how you have impacted the company and how you have added value. Instead of saying "I have excellent communication skills," say "Presented quarterly performance updates to internal stakeholders," in order to demonstrate it.
+
+Should I evaluate my skill levels?
+Unless you hold a skill or certification that has levels prescribed through a conventional standard (i.e., such as through a governing body), it's best not to provide a self-evaluation. If you include a skill on your resume, the assumption is that you have at least a working knowledge of that skill such that you could employ it in a professional setting. If you don't meet this requirement, it's best not to include it.
+
+Education
+This section will vary greatly from individual to individual according to your level of qualification and its relevance to the jobs you are applying to. If your education is very relevant for the job you are applying to then it should be featured on the first page of your resume above your experience section.
+
+Your education would normally be considered relevant if it is within the same field for which you are working. For example, a Finance Degree for an accounting role or an MBA for a Management Consultancy position. It would also be considered relevant if you're a recent graduate with limited work experience, as it shows your ability to learn and demonstrates your level of training and knowledge.
+
+However, if you did not achieve a high level of education, did not study in any particular field, or you left school or university more than ten years’ ago, then your experience is probably going to be much more relevant than your education. In this case, add your education section below the experience section.
+
+Should I include my GPA?
+The general rule is never if under 3.0 and always if over 3.5. If you've been out of school for a year or more and you are already working in your field, your GPA is probably not important enough to be included on your resume at all.
+
+Many countries (notably the UK) do not employ the concept of a GPA, preferring rather to represent the general academic accomplishment with degree modifiers such as "Upper Second-Class Honours".
+
+Interests/hobbies
+Most of the time, an interests or hobbies section is not needed, simply because there are more pertinent things you could include in its place. The other reason is that most of the time, people don't include anything interesting at all or worth mentioning.
+
+For example, most resume interest sections go something like this:
+
+"Reading, running, swimming, coding, research".
+
+Not only is this uninteresting, but it's a complete waste of space. If you're going to include this section, at the very least make it specific (i.e., reading WWII history).
+
+References
+Don't include references or “references available upon request” on your resume. Do bring a reference sheet to any interviews so that you can provide them should they be requested.
+
+Resume Length
+You want to make sure your resume is only as long as it absolutely needs to be. The goal of a resume is to pique readers’ interests, establish qualifications and create some curiosity that will lead to an interview. For most people, one or two pages is sufficient. There are exceptions to this:
+
+For professionals in IT, cybersecurity, software engineering, or government roles, it's not uncommon to use two to three page resumes.
+
+For senior executives with an extensive career history, three page resumes are acceptable.
+
+For professionals in academia, an academic cv is the standard and can range between five and twelve pages in length.
+
+Submitting a resume
+How many resumes should I send out, and how much time should I spend on each one?
+In today's economy, it is not uncommon to send out 20 resumes before receiving a call back. Each resume should be targeted toward the industry and position to which you are applying. That will mean that you have several variants of your resume. Every cover letter should also be targeted toward the specific position AND the company.
+
+You've probably heard the adage of "Until you find a job, finding a job is your full-time job". It is up to you and your situation how much time you can and should put in to your job search.
+
+However, another crucial decision is how to balance quality and quantity. You can send out 50 identical resumes or four tailored ones. Contrary to popular advice, the answer is not always clear, and as a new grad, it can be hard to know what exactly you can change in a resume to reflect a specific job.
+
+However, it is generally recommended that you produce a few variants to cover your bases in the following categories:
+
+Industry - You may be a programmer with a background in many languages, but if you are going into web applications, you don't need to outline your past C++ projects.
+
+Company Size - Smaller companies may be more interested in you as a person rather than as an employee. Also, smaller companies will often skip the hiring manager and put your resume right into the hands of your prospective boss, meaning your resume can have more technical lingo.
+
+Country - If you are applying internationally, it can be useful to state your work permit eligibility.
+
+The most important thing is to put enough time into the resume variants and the cover letters to make sure there are no mistakes.
+
+Copy-pasting can result in a Dear Sir letter forwarded to Sarah Smith or a wrong company name. That is a death sentence. As a teenager, spend 30+ minutes on an application. As a university student, 1+ hours. As a new graduate, 1-2 hours. As a specialist, 2-4 hours. Everything you put in, you will get out.
+
+Sending PDF or Word Doc?
+Most ATS are compatible with both and in some job advertisements, the employer will specify which format to be used. However, some evidence suggests that a majority of ATS are more compatible with Word documents rather than PDF.
+
+Note: PDF resumes created in Adobe InDesign, Overleaf LaTeX, or Canva have been shown to not do as well with a lot of applicant tracking systems (ATS). If you plan on using one of these applications to build your resume, do so at your own risk.
+
+Should my cover letter just be the body of an email?
+The body of your email is not your cover letter and if one is requested, you still need to provide it on a separate letterhead (i.e., as a stand alone document).
+
+Should the cover letter and resume be combined in one document?
+Treat the two as separate documents unless otherwise instructed in the job advertisement.
+
+Building and Formatting a Resume With Little to No Work Experience
+Education
+As a student or recent graduate, your education section becomes the cornerstone of your resume. While experienced professionals typically place education below their work history, you'll want to lead with it. This immediately shows recruiters you're building relevant knowledge in your field.
+
+Make your coursework count by being selective. Instead of listing every class you've taken, highlight 3-4 courses that directly relate to the job you're targeting. For example, if you're applying for a marketing internship, courses like Digital Marketing, Consumer Behavior, and Marketing Analytics deserve emphasis.
+
+For academic projects, focus on outcomes and real-world applications:
+
+Rather than "Completed final project in Business Strategy," write "Developed comprehensive growth strategy for local business, which contributed to a 20% projected revenue increase"
+
+Instead of "Group project in Software Engineering," try "Led 4-person team to create inventory management system using Python and SQL"
+
+Remember: GPA is optional unless it's above 3.5 or specifically requested. Academic honors, dean's list appearances, and relevant scholarships all deserve mention, but keep descriptions brief and impactful.
+
+Skills
+Your skills section is where classroom learning transforms into workplace capabilities. For entry-level positions, recruiters often scan this section first to see if you have the basic technical foundation they need.
+
+Create clear categories for your skills to make them easily scannable. Common groupings include:
+
+Technical Skills (software, programming languages, specialized tools)
+Language Proficiencies (with accurate fluency levels)
+Laboratory/Research Techniques (for STEM fields)
+Industry-Specific Tools (like design software or accounting systems)
+Should you list skill levels?
+
+You don't need to list skill levels in the skills section; instead, show how you used said skills in the work experience or projects sections.
+
+Created 3 full-stack applications using React
+Completed 5 data analysis projects using R
+Designed marketing materials for student organizations using Adobe Creative Suite
+Avoid listing basic software like Microsoft Word unless specifically requested in the job posting. Focus instead on specialized tools and skills that differentiate you. And remember: anything you list is fair game for interview questions, so be prepared to demonstrate your capabilities.
+
+Projects & Portfolio
+For those with limited work experience, your projects section becomes your proof of capability. While experienced professionals show their work history, you'll use projects to demonstrate your ability to apply knowledge, solve problems, and deliver results.
+
+Every project on your resume should tell a clear story of what you accomplished and how it made a difference. The most effective project descriptions follow a simple formula: What you built + How you built it + The impact or outcome.
+
+Example:
+
+Instead of
+
+Created a website for local business
+
+Say this...
+
+Developed responsive e-commerce site using React and Node.js, resulting in 200+ online orders in first month.
+
+When describing group projects, show your involvement while acknowledging teamwork. Examples:
+
+Led 3-person team in developing inventory management system, coordinating weekly sprints and client communication
+Managed front-end development within 5-person project team, delivering all components on schedule
+Coordinated with 4 team members to research and present market expansion strategy for local startup
+Documentation matters as much as the project itself. Include links to:
+
+GitHub repositories with clean, well-commented code
+Live websites or applications
+Project documentation and technical write-ups
+Research posters or presentations
+Process blogs or case studies
+Selecting which projects to include requires strategy. Prioritize:
+
+Projects that align with your target industry or role
+Work that demonstrates relevant skills
+Projects with measurable outcomes or impact
+Collaborative work that shows your ability to work within a team
+Self-directed projects that show your ability to work independently
+For technical roles, include project details:
+
+Technologies and languages used
+Scale and complexity (users, data volume, features)
+Technical challenges overcome
+Performance improvements achieved
+Remember: Quality beats quantity. Three well-described, relevant projects are more valuable than a long list of minor assignments. Each project should earn its place on your resume by clearly demonstrating skills relevant to your target role.
+
+Experience Alternatives
+When traditional work experience is limited, your challenge is to show other activities that demonstrate professional capabilities. The important thing is presenting these experiences in a way that highlights transferable skills and measurable impact.
+
+Examples:
+The way you present your extracurricular activities makes a big difference. Below are some examples for how you can present various activities you may be involved in.
+
+Leadership in Student Organizations
+
+Instead of "Member of Marketing Club," write "Led 5-person team to increase club membership by 40% through targeted social media campaigns
+Rather than "Spanish Club Secretary," use "Managed $5,000 annual budget and coordinated 12 cultural events for 200+ members
+Replace "Chess Club Member" with "Organized weekly tournaments for 30+ participants and maintained club's ranking system
+Volunteer Work
+
+Developed and implemented new donor tracking system for local food bank, improving follow-up response rate by 25%
+Trained 15 new volunteers on shelter procedures and animal handling protocols
+Created social media content strategy that increased donation engagement by 35%
+Academic Research Experience - Unpaid
+
+Assisted professor with data collection and analysis for published study on consumer behavior
+Maintained detailed laboratory records and protocols for 3 concurrent research projects
+Collaborated with 4-person research team to develop survey methodology reaching 500+ participants
+Part-time Work Reframed
+
+Instead of "Made coffee and served customers," write "Maintained 98% customer satisfaction while processing 200+ transactions during peak hours"
+Replace "Stocked shelves" with "Managed inventory rotation system for $50,000 worth of perishable goods"
+Transform "Answered phones" to "Resolved 40+ customer inquiries daily while maintaining detailed call logs"
+The goal isn't to pad your resume but to authentically present your experiences in professional terms. Focus on responsibilities that demonstrate initiative, reliability, and measurable results.
+
+How you present your content matters
+The difference between a forgettable resume and one that lands interviews often comes down to how you describe your experiences. Turn basic task descriptions into achievement statements that showcase your impact.
+
+Start every bullet point with a strong action verb that captures what you actually accomplished:
+
+Instead of "Helped with..." use "Initiated," "Led," "Created," "Developed"
+Replace "Was responsible for..." with "Managed," "Coordinated," "Implemented"
+Transform "Worked on..." to "Delivered," "Executed," "Streamlined"
+Quantify wherever possible, even if the numbers are small:
+
+Increased Instagram engagement by 25% through consistent content strategy
+Reduced processing time by 15% by automating data entry tasks
+Managed study group of 12 students, improving average test scores by 18%
+When you can't find specific numbers, focus on scope and scale:
+
+Coordinated logistics for three campus-wide events
+Collaborated with teams across five departments
+Maintained detailed documentation used by entire 20-person organization
+Even without formal work experience, you can show value by being specific and detailed in how you describe your work.

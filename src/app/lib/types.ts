@@ -1,3 +1,5 @@
+type ThreeAchievements = [string, string, string];
+
 export interface WorkExperience {
 	jobTitle: string;
 	companyName: string;
@@ -17,7 +19,7 @@ export interface WorkExperience {
 	current: boolean;
 	description: string;
 	technologies?: string[];
-	achievements?: string[];
+	achievements?: ThreeAchievements;
 	industry?: string;
 	teamSize?: number;
 	roleLevel?: "Junior" | "Mid-level" | "Senior" | "Lead" | "Manager";

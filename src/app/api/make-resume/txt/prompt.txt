@@ -30,13 +30,13 @@ Input Format:
 resumeDataAndDescription: string (combined resume JSON and job description + guideline)
 
 Output JSON Structure:
-ts
-Copy
-Edit
+
+type ThreeAchievements = [string, string, string];
+
 export interface WorkExperience {
   jobTitle: string;
   companyName: string;
-  location?: string;
+  location: string;
   WorkStyle:
     | "Freelance"
     | "Contract"
@@ -45,14 +45,14 @@ export interface WorkExperience {
     | "Part-time"
     | "Internship"
     | "Volunteer";
-  projectName?: string;
+  projectName: string;
   workLink?: string;
   startDate: string;
   endDate?: string;
   current: boolean;
   description: string;
-  technologies?: string[];
-  achievements?: string[];
+  technologies: string[];
+	achievements: ThreeAchievements;
   industry?: string;
   teamSize?: number;
   roleLevel?: "Junior" | "Mid-level" | "Senior" | "Lead" | "Manager";
@@ -104,10 +104,10 @@ export interface UserDetails {
   currentTitle?: string;
   summary?: string;
   workPreference?: "Remote" | "Hybrid" | "On-site";
-  github?: string;
-  linkedin?: string;
-  twitter?: string;
-  website?: string;
+  github?: string; //only username
+  linkedin?: string; // only username
+  twitter?: string; // only username
+  website?: string; // only username
 }
 
 export interface Skill {

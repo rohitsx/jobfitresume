@@ -35,7 +35,6 @@ Job Description and User Data:
 ${await req.text()}
 `;
 		const resume = await makeResume(updatedPrompt);
-		console.log(resume);
 		return NextResponse.json({ resume });
 	} catch (error) {
 		console.error("error reading file", error);

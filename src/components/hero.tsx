@@ -1,6 +1,6 @@
 const HeroSection = () => {
 	return (
-		<section className="pt-32 pb-30 overflow-hidden">
+		<section className="pt-16 pb-10 sm:pt-32 sm:pb-30 overflow-hidden">
 			<div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
 				<div className="absolute w-96 h-96 bg-indigo-500 rounded-full opacity-20 blur-3xl -top-10 -left-10"></div>
 				<div className="absolute w-96 h-96 bg-purple-500 rounded-full opacity-20 blur-3xl top-40 right-20"></div>
@@ -60,7 +60,7 @@ const HeroSection = () => {
 							</a>
 						</div>
 					</div>
-					<div className="lg:w-1/2 relative hidden md:inline-block">
+					<div className="hidden lg:w-1/2 relative">
 						<div className="bg-white rounded-2xl shadow-2xl p-4 border border-gray-100 relative z-10">
 							<div className="w-full h-64 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl flex items-center justify-center">
 								<div className="flex flex-col items-center">

@@ -244,7 +244,7 @@ export default function NavBar({ userData }: { userData: UserData }) {
 
 			{/* Mobile Menu Dropdown */}
 			{isMobileMenuOpen && (
-				<div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+				<div className="md:hidden bg-white/80 border-t border-gray-100 shadow-lg">
 					<div className="container mx-auto px-6 py-4 space-y-4">
 						<div className="flex flex-col space-y-3">
 							<Link

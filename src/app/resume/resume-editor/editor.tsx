@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { ResumeData } from "../../lib/types";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { getDatabase, onValue, ref, update } from "firebase/database";
 import WorkExperienceView from "./workExperienceView";
 import EducationView from "./educationView";
 import ProjectsView from "./projectView";
@@ -12,223 +12,289 @@ import EducationForm from "./educationForm";
 import SkillsForm from "./skillForm";
 import UserDetailsView from "./userDetailsView";
 import ProjectsForm from "./projectForm";
+import {
+	ResumeData,
+	UserDetails,
+	WorkExperience,
+	Education,
+	Project,
+	Skill,
+} from "@/types/types";
+import { FirebaseApp } from "@/lib/firebase";
+import { getDbRef } from "@/lib/dbRef";
+
+type EditableData =
+	| UserDetails
+	| WorkExperience[]
+	| Education[]
+	| Project[]
+	| Skill[];
+
+type ChangeValue =
+	| string
+	| boolean
+	| number
+	| string[]
+	| WorkExperience
+	| Education
+	| Project
+	| Skill;
 
 export default function ResumeEditor() {
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
-  const [activeTab, setActiveTab] = useState("userDetails");
-  const [isEditing, setIsEditing] = useState(false);
-  const [editData, setEditData] = useState<any>(null);
+	const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+	const [activeTab, setActiveTab] = useState("userDetails");
+	const [isEditing, setIsEditing] = useState(false);
+	const [editData, setEditData] = useState<EditableData | null>(null);
+	const defRef = useMemo(() => getDbRef(), []);
 
-  useEffect(() => {
-    const storedData = localStorage.getItem("resumeData");
-    if (storedData) {
-      setResumeData(JSON.parse(storedData));
-    }
-  }, []);
+	const fetchResumeData = useCallback(async () => {
+		const uid = localStorage.getItem("uid");
 
-  const handleSave = () => {
-    if (!editData || !resumeData) return;
+		if (!uid) throw new Error("No uid found");
 
-    let updatedData: ResumeData;
+		onValue(defRef, (snapshot) => {
+			if (snapshot.exists()) {
+				const { resumeData } = snapshot.val();
+				setResumeData(resumeData);
+			}
+		});
+	}, [defRef]);
 
-    if (activeTab === "userDetails") {
-      updatedData = { ...resumeData, userDetails: editData };
-    } else if (activeTab === "workExperience" && Array.isArray(editData)) {
-      updatedData = { ...resumeData, workExperience: editData };
-    } else if (activeTab === "education" && Array.isArray(editData)) {
-      updatedData = { ...resumeData, education: editData };
-    } else if (activeTab === "projects" && Array.isArray(editData)) {
-      updatedData = { ...resumeData, projects: editData };
-    } else if (activeTab === "skills" && Array.isArray(editData)) {
-      updatedData = { ...resumeData, skills: editData };
-    } else {
-      return;
-    }
+	useEffect(() => {
+		fetchResumeData();
+	}, [fetchResumeData]);
 
-    // Save to localStorage
-    localStorage.setItem("resumeData", JSON.stringify(updatedData));
-    setResumeData(updatedData);
-    setIsEditing(false);
-  };
+	const handleSave = () => {
+		if (!editData || !resumeData) return;
 
-  const handleEdit = () => {
-    if (!resumeData) return;
+		let updatedData: ResumeData;
 
-    let dataToEdit;
-    if (activeTab === "userDetails") {
-      dataToEdit = resumeData.userDetails;
-    } else {
-      dataToEdit = resumeData[activeTab as keyof typeof resumeData];
-    }
+		if (activeTab === "userDetails") {
+			updatedData = { ...resumeData, userDetails: editData as UserDetails };
+		} else if (activeTab === "workExperience" && Array.isArray(editData)) {
+			updatedData = {
+				...resumeData,
+				workExperience: editData as WorkExperience[],
+			};
+		} else if (activeTab === "education" && Array.isArray(editData)) {
+			updatedData = { ...resumeData, education: editData as Education[] };
+		} else if (activeTab === "projects" && Array.isArray(editData)) {
+			updatedData = { ...resumeData, projects: editData as Project[] };
+		} else if (activeTab === "skills" && Array.isArray(editData)) {
+			updatedData = { ...resumeData, skills: editData as Skill[] };
+		} else {
+			return;
+		}
 
-    setEditData(JSON.parse(JSON.stringify(dataToEdit)));
-    setIsEditing(true);
-  };
+		const uid = localStorage.getItem("uid");
 
-  const handleCancel = () => {
-    setIsEditing(false);
-    setEditData(null);
-  };
+		if (!uid) throw new Error("No uid found");
+		const db = getDatabase(FirebaseApp);
 
-  const handleChange = (
-    value: any,
-    section?: string,
-    index?: number,
-    field?: string,
-  ) => {
-    if (!editData) return;
+		const resumeRef = ref(db, `users/${uid}`);
 
-    if (activeTab === "userDetails") {
-      setEditData({ ...editData, [field as string]: value });
-    } else if (Array.isArray(editData) && typeof index === "number" && field) {
-      const newData = [...editData];
-      newData[index] = { ...newData[index], [field]: value };
-      setEditData(newData);
-    }
-  };
+		update(resumeRef, {
+			resumeData: updatedData,
+		});
 
-  const renderTab = () => {
-    if (!resumeData || isEditing) return null;
+		setResumeData(updatedData);
+		setIsEditing(false);
+	};
 
-    switch (activeTab) {
-      case "userDetails":
-        return <UserDetailsView data={resumeData.userDetails} />;
-      case "workExperience":
-        return <WorkExperienceView data={resumeData.workExperience} />;
-      case "education":
-        return <EducationView data={resumeData.education} />;
-      case "projects":
-        return <ProjectsView data={resumeData.projects} />;
-      case "skills":
-        return <SkillsView data={resumeData.skills} />;
-      default:
-        return null;
-    }
-  };
+	const handleEdit = () => {
+		if (!resumeData) return;
 
-  const renderEditForm = () => {
-    if (!isEditing || !editData) return null;
+		let dataToEdit: EditableData;
+		if (activeTab === "userDetails") {
+			dataToEdit = resumeData.userDetails || ({} as UserDetails);
+		} else {
+			const tabData = resumeData[activeTab as keyof typeof resumeData];
 
-    switch (activeTab) {
-      case "userDetails":
-        return (
-          <UserDetailsForm
-            data={editData}
-            onChange={(field, value) =>
-              handleChange(value, undefined, undefined, field)
-            }
-          />
-        );
-      case "workExperience":
-        return (
-          <WorkExperienceForm
-            data={editData}
-            onChange={(index, field, value) =>
-              handleChange(value, "workExperience", index, field)
-            }
-          />
-        );
-      case "education":
-        return (
-          <EducationForm
-            data={editData}
-            onChange={(index, field, value) =>
-              handleChange(value, "education", index, field)
-            }
-          />
-        );
-      case "projects":
-        return (
-          <ProjectsForm
-            data={editData}
-            onChange={(index, field, value) =>
-              handleChange(value, "projects", index, field)
-            }
-          />
-        );
-      case "skills":
-        return (
-          <SkillsForm
-            data={editData}
-            onChange={(index, field, value) =>
-              handleChange(value, "skills", index, field)
-            }
-          />
-        );
-      default:
-        return null;
-    }
-  };
+			if (
+				["workExperience", "education", "projects", "skills"].includes(
+					activeTab,
+				)
+			) {
+				dataToEdit = Array.isArray(tabData) ? tabData : [];
+			} else {
+				dataToEdit = (tabData || {}) as UserDetails;
+			}
+		}
 
-  if (!resumeData) {
-    return (
-      <div className="p-6 flex justify-center items-center min-h-screen">
-        <p>No resume data found. Please upload a PDF first.</p>
-      </div>
-    );
-  }
+		setEditData(
+			dataToEdit ? JSON.parse(JSON.stringify(dataToEdit)) : dataToEdit,
+		);
+		setIsEditing(true);
+	};
 
-  return (
-    <div className="container mx-auto ">
-      <h1 className="text-2xl font-bold mb-6">Resume Editor</h1>
+	const handleCancel = () => {
+		setIsEditing(false);
+		setEditData(null);
+	};
 
-      {/* Navigation Tabs */}
-      <div className="flex border-b mb-6">
-        {[
-          "userDetails",
-          "workExperience",
-          "education",
-          "projects",
-          "skills",
-        ].map((tab) => (
-          <button
-            key={tab}
-            className={`px-4 py-2 ${
-              activeTab === tab
-                ? "border-b-2 border-blue-500 text-blue-500"
-                : "text-gray-500"
-            }`}
-            onClick={() => {
-              setActiveTab(tab);
-              setIsEditing(false);
-            }}
-          >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
-          </button>
-        ))}
-      </div>
+	const handleChange = (
+		value: ChangeValue,
+		section?: string,
+		index?: number,
+		field?: string,
+	) => {
+		if (!editData) return;
 
-      {/* Edit/Save/Cancel Buttons */}
-      <div className="mb-6 flex space-x-2">
-        {!isEditing ? (
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={handleEdit}
-          >
-            Edit
-          </button>
-        ) : (
-          <>
-            <button
-              className="bg-green-500 text-white px-4 py-2 rounded"
-              onClick={handleSave}
-            >
-              Save
-            </button>
-            <button
-              className="bg-red-500 text-white px-4 py-2 rounded"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-          </>
-        )}
-      </div>
+		if (activeTab === "userDetails" && !Array.isArray(editData) && field) {
+			setEditData({ ...editData, [field]: value } as UserDetails);
+		} else if (Array.isArray(editData) && typeof index === "number" && field) {
+			const newData = [...editData] as (
+				| WorkExperience
+				| Education
+				| Project
+				| Skill
+			)[];
+			newData[index] = { ...newData[index], [field]: value };
+			setEditData(newData as EditableData);
+		}
+	};
 
-      {/* Content Area */}
-      <div className="bg-white rounded-lg shadow p-6">
-        {isEditing ? renderEditForm() : renderTab()}
-      </div>
-    </div>
-  );
+	const renderTab = () => {
+		if (!resumeData || isEditing) return null;
+
+		switch (activeTab) {
+			case "userDetails":
+				return <UserDetailsView data={resumeData.userDetails} />;
+			case "workExperience":
+				return <WorkExperienceView data={resumeData.workExperience} />;
+			case "education":
+				return <EducationView data={resumeData.education} />;
+			case "projects":
+				return <ProjectsView data={resumeData.projects} />;
+			case "skills":
+				return <SkillsView data={resumeData.skills} />;
+			default:
+				return null;
+		}
+	};
+
+	const renderEditForm = () => {
+		if (!isEditing || !editData) return null;
+
+		switch (activeTab) {
+			case "userDetails":
+				return (
+					<UserDetailsForm
+						data={editData as UserDetails}
+						onChange={(field, value) =>
+							handleChange(value, undefined, undefined, field)
+						}
+					/>
+				);
+			case "workExperience":
+				return (
+					<WorkExperienceForm
+						data={editData as WorkExperience[]}
+						onChange={(index, field, value) =>
+							handleChange(value, "workExperience", index, field)
+						}
+					/>
+				);
+			case "education":
+				return (
+					<EducationForm
+						data={editData as Education[]}
+						onChange={(index, field, value) =>
+							handleChange(value, "education", index, field)
+						}
+					/>
+				);
+			case "projects":
+				return (
+					<ProjectsForm
+						data={editData as Project[]}
+						onChange={(index, field, value) =>
+							handleChange(value, "projects", index, field)
+						}
+					/>
+				);
+			case "skills":
+				return (
+					<SkillsForm
+						data={editData as Skill[]}
+						onChange={(index, field, value) =>
+							handleChange(value, "skills", index, field)
+						}
+					/>
+				);
+			default:
+				return null;
+		}
+	};
+
+	if (!resumeData) {
+		return (
+			<div className="p-6 flex justify-center items-center min-h-screen">
+				<p>No resume data found. Please upload a PDF first.</p>
+			</div>
+		);
+	}
+
+	return (
+		<div className="container mx-auto ">
+			<h1 className="text-2xl font-bold mb-6">Resume Editor</h1>
+
+			{/* Navigation Tabs */}
+			<div className="flex border-b mb-6">
+				{[
+					"userDetails",
+					"workExperience",
+					"education",
+					"projects",
+					"skills",
+				].map((tab) => (
+					<button
+						key={tab}
+						className={`px-4 py-2 ${activeTab === tab
+								? "border-b-2 border-blue-500 text-blue-500"
+								: "text-gray-500"
+							}`}
+						onClick={() => {
+							setActiveTab(tab);
+							setIsEditing(false);
+						}}
+					>
+						{tab.charAt(0).toUpperCase() + tab.slice(1)}
+					</button>
+				))}
+			</div>
+
+			{/* Edit/Save/Cancel Buttons */}
+			<div className="mb-6 flex space-x-2">
+				{!isEditing ? (
+					<button
+						className="bg-blue-500 text-white px-4 py-2 rounded"
+						onClick={handleEdit}
+					>
+						Edit
+					</button>
+				) : (
+					<>
+						<button
+							className="bg-green-500 text-white px-4 py-2 rounded"
+							onClick={handleSave}
+						>
+							Save
+						</button>
+						<button
+							className="bg-red-500 text-white px-4 py-2 rounded"
+							onClick={handleCancel}
+						>
+							Cancel
+						</button>
+					</>
+				)}
+			</div>
+
+			{/* Content Area */}
+			<div className="bg-white rounded-lg shadow p-6">
+				{isEditing ? renderEditForm() : renderTab()}
+			</div>
+		</div>
+	);
 }

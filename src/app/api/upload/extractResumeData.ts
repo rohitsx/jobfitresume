@@ -1,9 +1,11 @@
+import env from "@/lib/env";
 import { GoogleGenAI } from "@google/genai";
 
 export async function extractResumeData(text: string) {
 	const ai = new GoogleGenAI({
-		apiKey: process.env.GEMINI_API_KEY,
+		apiKey: env.geminiApiKey,
 	});
+	console.log(text);
 
 	const response = await ai.models.generateContent({
 		model: "gemini-1.5-flash-8b",

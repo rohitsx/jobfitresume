@@ -1,7 +1,7 @@
 "use client";
 
+import { ResumeData } from "@/types/types";
 import { useEffect, useState, useRef } from "react";
-import { ResumeData } from "../lib/types";
 
 interface Resume {
 	resume: ResumeData;

@@ -1,9 +1,11 @@
+import { UserDetails } from "@/types/types";
+
 export default function UserDetailsForm({
 	data,
 	onChange,
 }: {
-	data: any;
-	onChange: (field: string, value: any) => void;
+	data: UserDetails;
+	onChange: (field: string, value: string) => void;
 }) {
 	return (
 		<div className="space-y-4">

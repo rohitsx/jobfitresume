@@ -91,3 +91,17 @@ export interface ResumeData {
 	projects: Project[];
 	skills: Skill[];
 }
+
+export type IconName =
+	| "AI"
+	| "TIME"
+	| "STAR"
+	| "EASY"
+	| "UPLOAD"
+	| "EDIT"
+	| "PASTE"
+	| "MAGIC";
+
+export interface IconProps {
+	name: IconName;
+}

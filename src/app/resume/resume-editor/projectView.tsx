@@ -1,4 +1,23 @@
-export default function ProjectsView({ data }: { data: any[] }) {
+import { Project } from "@/types/types";
+
+export default function ProjectsView({
+	data,
+}: {
+	data: Project[] | undefined;
+}) {
+	if (!data || !Array.isArray(data) || data.length === 0) {
+		return (
+			<div className="space-y-6">
+				<h2 className="text-xl font-semibold">Projects</h2>
+				<div className="text-center py-8 bg-gray-50 rounded-lg">
+					<p className="text-gray-500">
+						No projects found. Click the &quot;Edit&quot; button to add your
+						projects.
+					</p>
+				</div>
+			</div>
+		);
+	}
 	return (
 		<div className="space-y-6">
 			<h2 className="text-xl font-semibold">Projects</h2>
@@ -16,12 +35,12 @@ export default function ProjectsView({ data }: { data: any[] }) {
 							{project.teamSize && ` • Team of ${project.teamSize}`}
 						</p>
 					)}
-
 					<p className="mt-2">{project.description}</p>
-					<p className="mt-1">
-						<strong>Outcome:</strong> {project.outcome}
-					</p>
-
+					{project.outcome && (
+						<p className="mt-1">
+							<strong>Outcome:</strong> {project.outcome}
+						</p>
+					)}
 					{project.technologies && project.technologies.length > 0 && (
 						<div className="mt-2">
 							<p className="font-medium">Technologies:</p>
@@ -37,7 +56,6 @@ export default function ProjectsView({ data }: { data: any[] }) {
 							</div>
 						</div>
 					)}
-
 					<div className="mt-2 flex gap-4">
 						{project.repoLink && (
 							<a
@@ -60,7 +78,6 @@ export default function ProjectsView({ data }: { data: any[] }) {
 							</a>
 						)}
 					</div>
-
 					{project.keyLearnings && project.keyLearnings.length > 0 && (
 						<div className="mt-2">
 							<p className="font-medium">Key Learnings:</p>

@@ -1,4 +1,4 @@
-import { WorkExperience } from "@/app/lib/types";
+import { WorkExperience } from "@/types/types";
 
 export default function WorkExperienceView({
 	data,

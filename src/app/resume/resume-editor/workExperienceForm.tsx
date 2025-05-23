@@ -1,11 +1,13 @@
-import { WorkExperience } from "@/app/lib/types";
+import { WorkExperience } from "@/types/types";
+
+type WorkExperienceValue = string | boolean | string[] | number;
 
 export default function WorkExperienceForm({
 	data,
 	onChange,
 }: {
 	data: WorkExperience[];
-	onChange: (index: number, field: string, value: any) => void;
+	onChange: (index: number, field: string, value: WorkExperienceValue) => void;
 }) {
 	return (
 		<div className="space-y-6">
@@ -173,7 +175,9 @@ export default function WorkExperienceForm({
 							<input
 								type="number"
 								value={job.teamSize || ""}
-								onChange={(e) => onChange(index, "teamSize", e.target.value)}
+								onChange={(e) =>
+									onChange(index, "teamSize", Number(e.target.value))
+								}
 								min="1"
 								className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
 							/>
@@ -246,7 +250,7 @@ export default function WorkExperienceForm({
 							achievements: [],
 						},
 					];
-					onChange(newJobs.length - 1, "", ""); // Trigger update with empty values
+					onChange(newJobs.length - 1, "", "");
 				}}
 				className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
 			>

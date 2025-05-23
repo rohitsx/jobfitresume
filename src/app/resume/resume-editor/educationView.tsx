@@ -1,4 +1,6 @@
-export default function EducationView({ data }: { data: any[] }) {
+import { Education } from "@/types/types";
+
+export default function EducationView({ data }: { data: Education[] }) {
 	return (
 		<div className="space-y-6">
 			<h2 className="text-xl font-semibold">Education</h2>

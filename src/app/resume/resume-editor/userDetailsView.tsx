@@ -1,4 +1,6 @@
-export default function UserDetailsView({ data }: { data: any }) {
+import { UserDetails } from "@/types/types";
+
+export default function UserDetailsView({ data }: { data: UserDetails }) {
 	return (
 		<div className="space-y-4">
 			<h2 className="text-xl font-semibold">{data.name}</h2>
@@ -10,14 +12,12 @@ export default function UserDetailsView({ data }: { data: any }) {
 				{data.city}, {data.state}, {data.country}
 			</p>
 			<p>Preferred Work Style: {data.workPreference}</p>
-
 			{data.summary && (
 				<div className="mt-4">
 					<h3 className="font-medium">Summary</h3>
 					<p className="mt-1">{data.summary}</p>
 				</div>
 			)}
-
 			<div className="mt-4">
 				<h3 className="font-medium">Links</h3>
 				<div className="flex flex-wrap gap-4 mt-1">

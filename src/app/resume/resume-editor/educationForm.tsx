@@ -1,9 +1,15 @@
+import { Education } from "@/types/types";
+
 export default function EducationForm({
 	data,
 	onChange,
 }: {
-	data: any[];
-	onChange: (index: number, field: string, value: any) => void;
+	data: Education[];
+	onChange: (
+		index: number,
+		field: string,
+		value: string | boolean | string[],
+	) => void;
 }) {
 	return (
 		<div className="space-y-6">
@@ -210,7 +216,7 @@ export default function EducationForm({
 			<button
 				type="button"
 				onClick={() => {
-					const newEducation = [
+					const newEducation: Education[] = [
 						...data,
 						{
 							degree: "",

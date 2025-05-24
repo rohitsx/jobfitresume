@@ -4,6 +4,7 @@ import React from "react";
 import "@/styles/globals.css";
 import NavBar from "@/components/navbar";
 import { getCookies } from "@/lib/getCookies";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -54,6 +55,7 @@ export default async function RootLayout({
 		<html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
 			<body>
 				<div className="flex flex-col min-h-screen">
+					<SpeedInsights />
 					<NavBar userData={userData} />
 					{children}
 				</div>

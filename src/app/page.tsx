@@ -6,16 +6,16 @@ import HowItWorksSection from "@/components/howItWork";
 import PricingSection from "@/components/price";
 
 export default function LandingPage() {
-	return (
-		<>
-			<main className="flex-grow">
-				<HeroSection />
-				<FeaturesSection />
-				<HowItWorksSection />
-				<PricingSection />
-				<FaqSection />
-			</main>
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <main className="flex-grow">
+        <HeroSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        {/* <PricingSection /> */}
+        <FaqSection />
+      </main>
+      <Footer />
+    </>
+  );
 }

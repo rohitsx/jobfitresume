@@ -64,7 +64,6 @@ export default function NavBar({ userData }: { userData: UserData }) {
 	const userMenuRef = useRef<HTMLDivElement>(null);
 	const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-	// --- User Menu Logic ---
 	const openUserMenu = () => {
 		if (hoverTimeoutRef.current) {
 			clearTimeout(hoverTimeoutRef.current);
@@ -132,7 +131,7 @@ export default function NavBar({ userData }: { userData: UserData }) {
 			setIsLoggingOut(true);
 			closeUserMenuImmediately(); // Close menu immediately
 			await deleteAuthCookies();
-			// Force a hard redirect to ensure clean state
+			localStorage.clear();
 			window.location.replace("/login");
 		} catch (error) {
 			console.error("Logout failed:", error);

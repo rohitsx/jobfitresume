@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 	keywords:
 		"AI resume builder, tailored resume, custom resume, job description resume, resume optimization, Gemini resume, stand out resume, get hired faster, resume AI, Next.js resume tool",
 	icons: {
-		icon: "/favicon.ico",
+		icon: "/icon.ico",
 	},
 	openGraph: {
 		title: "JobFit Resume | AI-Powered Resume Tailoring",

@@ -12,13 +12,16 @@
     "@google/genai": "^0.12.0",
     "@next/third-parties": "^15.1.8",
     "@vercel/speed-insights": "^1.2.0",
+    "dodopayments": "^1.27.0",
     "ejs": "^3.1.10",
     "firebase": "^11.7.3",
     "lucide-react": "^0.511.0",
     "next": "15.3.1",
     "pdf-parse": "^1.1.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "standardwebhooks": "^1.0.0",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

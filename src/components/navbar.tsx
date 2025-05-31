@@ -161,12 +161,6 @@ export default function NavBar({ userData }: { userData: UserData }) {
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
-          {/* <Link */}
-          {/*   href="/#pricing" */}
-          {/*   className="text-gray-600 hover:text-indigo-600 transition-colors" */}
-          {/* > */}
-          {/*   Pricing */}
-          {/* </Link> */}
           <Link
             href="/#how-it-works"
             className="text-gray-600 hover:text-indigo-600 transition-colors"
@@ -178,6 +172,12 @@ export default function NavBar({ userData }: { userData: UserData }) {
             className="text-gray-600 hover:text-indigo-600 transition-colors"
           >
             Resume
+          </Link>
+          <Link
+            href="/pricing"
+            className="text-gray-600 hover:text-indigo-600 transition-colors"
+          >
+            Pricing
           </Link>
         </div>
 

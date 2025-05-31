@@ -17,7 +17,7 @@ body {
 		padding: 0;
 	}
 
-	@root {
+	html {
 		margin: 0;
 		padding: 0;
 	}

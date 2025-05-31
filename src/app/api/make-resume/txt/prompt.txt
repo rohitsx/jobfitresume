@@ -89,7 +89,7 @@ export interface UserDetails {
   phone?: string;
   country: string;
   state?: string;
-  currentTitle?: string; //update based on job descriptions and do not use word Aspiring
+  currentTitle?: string; //Add the name of the position the user is applying for. If not provided, keep it original.
   summary?: string;  //do not exceed 30 words
   workPreference?: "Remote" | "Hybrid" | "On-site";
   github?: string;

@@ -100,3 +100,20 @@ export type IconName =
 export interface IconProps {
 	name: IconName;
 }
+
+export type EditableData =
+	| UserDetails
+	| WorkExperience[]
+	| Education[]
+	| Project[]
+	| Skill[];
+
+export type ChangeValue =
+	| string
+	| boolean
+	| number
+	| string[]
+	| WorkExperience
+	| Education
+	| Project
+	| Skill;

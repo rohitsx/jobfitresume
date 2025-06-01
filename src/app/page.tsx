@@ -5,15 +5,15 @@ import HeroSection from "@/components/hero";
 import HowItWorksSection from "@/components/howItWork";
 
 export default function LandingPage() {
-  return (
-    <>
-      <main className="flex-grow">
-        <HeroSection />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <FaqSection />
-      </main>
-      <Footer />
-    </>
-  );
+	return (
+		<>
+			<main className="flex-grow">
+				<HeroSection />
+				<FeaturesSection />
+				<HowItWorksSection />
+				<FaqSection />
+			</main>
+			<Footer />
+		</>
+	);
 }

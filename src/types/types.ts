@@ -1,9 +1,7 @@
-type FourAchievements = [string, string, string, string];
-
 export interface WorkExperience {
-	jobTitle: string;
 	companyName: string;
-	location?: string;
+	jobTitle: string;
+	location: string;
 	WorkStyle:
 	| "Freelance"
 	| "Contract"
@@ -12,14 +10,19 @@ export interface WorkExperience {
 	| "Part-time"
 	| "Internship"
 	| "Volunteer";
-	workLink?: string;
 	startDate: string;
 	endDate?: string;
 	current: boolean;
-	description?: string;
-	achievements?: FourAchievements;
+	description: string[];
 	technologies?: string[];
-	roleLevel?: "Junior" | "Mid-level" | "Senior" | "Lead" | "Manager";
+	roleLevel:
+	| "Junior"
+	| "Mid-level"
+	| "Senior"
+	| "Lead"
+	| "Manager"
+	| "Founder"
+	| "CTO";
 }
 
 export interface Education {
@@ -38,45 +41,38 @@ export interface Education {
 	graduationDate?: string;
 	completed: boolean;
 	gpa?: string | null;
-	keyLearnings?: string[];
 }
 
 export interface Project {
 	title: string;
-	description?: string;
-	outcome?: string;
+	description?: string[];
 	startDate: string;
-	endDate: string;
-	type?: "Personal" | "Academic" | "Freelance" | "Hackathon" | "Client";
-	role?: string;
+	endDate?: string;
+	current: boolean;
+	type?: "Personal" | "Academic" | "Freelance" | "Hackathon";
 	technologies?: string[];
-	teamSize?: number;
-	repoLink?: string;
-	liveDemoLink?: string;
-	keyLearnings?: string[];
-	achievements?: FourAchievements;
+	link?: {
+		repo?: string;
+		live?: string;
+		demo?: string;
+	};
 }
 
 export interface UserDetails {
 	country: string;
 	name: string;
 	email: string;
-	phone?: string;
-	state?: string;
 	currentTitle?: string;
 	summary?: string;
 	workPreference?: "Remote" | "Hybrid" | "On-site";
 	github?: string;
 	linkedin?: string;
-	twitter?: string;
 	website?: string;
 }
 
 export interface Skill {
 	name: string;
-	category: "Technical" | "Soft Skill" | "Language" | "Other";
-	proficiency?: "Beginner" | "Intermediate" | "Advanced" | "Expert";
-	yearsOfExperience?: number;
+	category: string;
 }
 
 export interface ResumeData {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { ResumeJsonStore } from "@/store/resumeStore";
+import { ResumeJsonStore } from "@/store/useGeneratedResumeStore";
 import ResumeHeader from "./header";
 import Summary from "./summary";
 import { DowloadPdf, GreyLine } from "./components";

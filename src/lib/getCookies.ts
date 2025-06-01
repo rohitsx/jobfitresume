@@ -1,12 +1,11 @@
 import { cookies } from "next/headers";
-
 export async function getCookies() {
-  "use server";
+	"use server";
 
-  const cookieStore = await cookies();
-  const uid = cookieStore.get("uid")?.value;
-  const displayName = cookieStore.get("displayName")?.value;
-  const email = cookieStore.get("email")?.value;
+	const cookieStore = await cookies();
+	const uid = cookieStore.get("uid")?.value;
+	const displayName = cookieStore.get("displayName")?.value;
+	const email = cookieStore.get("email")?.value;
 
-  return { uid, displayName, email };
+	return { uid, displayName, email };
 }

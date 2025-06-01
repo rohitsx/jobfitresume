@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import {
 	User,
 	Briefcase,
@@ -12,18 +12,22 @@ import {
 	X,
 	AlertTriangle,
 	FileText,
+	LucideIcon,
 } from "lucide-react";
-import { getDatabase, onValue, ref, update } from "firebase/database";
-import WorkExperienceView from "./workExperienceView";
-import EducationView from "./educationView";
-import ProjectsView from "./projectView";
-import SkillsView from "./skillsView";
-import UserDetailsForm from "./userDetailsForm";
-import WorkExperienceForm from "./workExperienceForm";
-import EducationForm from "./educationForm";
-import SkillsForm from "./skillForm";
-import UserDetailsView from "./userDetailsView";
-import ProjectsForm from "./projectForm";
+import { update } from "firebase/database";
+
+// Component Imports (assuming these are correctly pathed)
+import WorkExperienceView from "./view/workExperienceView";
+import EducationView from "./view/educationView";
+import ProjectsView from "./view/projectView";
+import SkillsView from "./view/skillsView";
+import UserDetailsView from "./view/userDetailsView";
+import UserDetailsForm from "./form/userDetailsForm";
+import WorkExperienceForm from "./form/workExperienceForm";
+import EducationForm from "./form/educationForm";
+import ProjectsForm from "./form/projectForm";
+import SkillsForm from "./form/skillForm";
+
 import {
 	ResumeData,
 	UserDetails,
@@ -34,218 +38,177 @@ import {
 	EditableData,
 	ChangeValue,
 } from "@/types/types";
-import { FirebaseApp } from "@/lib/firebase";
 import { getDbRef } from "@/lib/dbRef";
+import { useResumeStore } from "@/store/useResumeStore";
+
+type TabKey =
+	| "userDetails"
+	| "workExperience"
+	| "education"
+	| "projects"
+	| "skills";
+
+interface TabConfig {
+	label: string;
+	icon: LucideIcon;
+	dataKey: keyof ResumeData;
+	ViewComponent: React.FC<{ data: any }>; // Adjust 'any' if you have more specific props
+	FormComponent: React.FC<{ data: any; onChange: (...args: any[]) => void }>; // Adjust 'any'
+	isList: boolean; // True if data for this tab is an array
+}
+
+const TAB_CONFIG: Record<TabKey, TabConfig> = {
+	userDetails: {
+		label: "Personal Details",
+		icon: User,
+		dataKey: "userDetails",
+		ViewComponent: UserDetailsView,
+		FormComponent: UserDetailsForm,
+		isList: false,
+	},
+	workExperience: {
+		label: "Work Experience",
+		icon: Briefcase,
+		dataKey: "workExperience",
+		ViewComponent: WorkExperienceView,
+		FormComponent: WorkExperienceForm,
+		isList: true,
+	},
+	education: {
+		label: "Education",
+		icon: GraduationCap,
+		dataKey: "education",
+		ViewComponent: EducationView,
+		FormComponent: EducationForm,
+		isList: true,
+	},
+	projects: {
+		label: "Projects",
+		icon: FolderOpen,
+		dataKey: "projects",
+		ViewComponent: ProjectsView,
+		FormComponent: ProjectsForm,
+		isList: true,
+	},
+	skills: {
+		label: "Skills",
+		icon: Lightbulb,
+		dataKey: "skills",
+		ViewComponent: SkillsView,
+		FormComponent: SkillsForm,
+		isList: true,
+	},
+};
+
+const TAB_ORDER: TabKey[] = [
+	"userDetails",
+	"workExperience",
+	"education",
+	"projects",
+	"skills",
+];
 
 export default function ResumeEditor() {
-	const [resumeData, setResumeData] = useState<ResumeData | null>(null);
-	const [activeTab, setActiveTab] = useState("userDetails");
+	const [activeTab, setActiveTab] = useState<TabKey>("userDetails");
 	const [isEditing, setIsEditing] = useState(false);
 	const [editData, setEditData] = useState<EditableData | null>(null);
 	const [isSaving, setIsSaving] = useState(false);
-	const defRef = useMemo(() => getDbRef(), []);
+	const { resumeData, uid, setResumeData } = useResumeStore();
 
-	const fetchResumeData = useCallback(async () => {
-		const uid = localStorage.getItem("uid");
+	const currentTabConfig = useMemo(() => TAB_CONFIG[activeTab], [activeTab]);
 
-		if (!uid) throw new Error("No uid found");
-
-		onValue(defRef, (snapshot) => {
-			if (snapshot.exists()) {
-				const { resumeData } = snapshot.val();
-				setResumeData(resumeData);
-			}
-		});
-	}, [defRef]);
-
-	useEffect(() => {
-		fetchResumeData();
-	}, [fetchResumeData]);
-
-	const handleSave = async () => {
-		if (!editData || !resumeData) return;
+	const handleSave = useCallback(async () => {
+		if (!editData || !resumeData || !currentTabConfig) return;
 
 		setIsSaving(true);
-
-		let updatedData: ResumeData;
-
-		if (activeTab === "userDetails") {
-			updatedData = { ...resumeData, userDetails: editData as UserDetails };
-		} else if (activeTab === "workExperience" && Array.isArray(editData)) {
-			updatedData = {
-				...resumeData,
-				workExperience: editData as WorkExperience[],
-			};
-		} else if (activeTab === "education" && Array.isArray(editData)) {
-			updatedData = { ...resumeData, education: editData as Education[] };
-		} else if (activeTab === "projects" && Array.isArray(editData)) {
-			updatedData = { ...resumeData, projects: editData as Project[] };
-		} else if (activeTab === "skills" && Array.isArray(editData)) {
-			updatedData = { ...resumeData, skills: editData as Skill[] };
-		} else {
-			setIsSaving(false);
-			return;
-		}
-
 		try {
-			const uid = localStorage.getItem("uid");
-			if (!uid) throw new Error("No uid found");
-			const db = getDatabase(FirebaseApp);
-			const resumeRef = ref(db, `users/${uid}`);
+			if (!uid) throw new Error("User ID (uid) not found. Cannot save.");
 
-			update(resumeRef, {
-				resumeData: updatedData,
-			});
+			const updatedResumeData: ResumeData = {
+				...resumeData,
+				[currentTabConfig.dataKey]: editData,
+			};
 
-			setResumeData(updatedData);
+			const dbRef = getDbRef(uid);
+			await update(dbRef, { resumeData: updatedResumeData });
+
+			setResumeData(updatedResumeData);
 			setIsEditing(false);
+			setEditData(null);
 		} catch (error) {
 			console.error("Error saving data:", error);
 		} finally {
 			setIsSaving(false);
 		}
-	};
+	}, [editData, resumeData, currentTabConfig, uid, setResumeData]);
 
-	const handleEdit = () => {
-		if (!resumeData) return;
+	const handleEdit = useCallback(() => {
+		if (!resumeData || !currentTabConfig) return;
 
-		let dataToEdit: EditableData;
-		if (activeTab === "userDetails") {
-			dataToEdit = resumeData.userDetails || ({} as UserDetails);
-		} else {
-			const tabData = resumeData[activeTab as keyof typeof resumeData];
-
-			if (
-				["workExperience", "education", "projects", "skills"].includes(
-					activeTab,
-				)
-			) {
-				dataToEdit = Array.isArray(tabData) ? tabData : [];
-			} else {
-				dataToEdit = (tabData || {}) as UserDetails;
-			}
-		}
-
-		setEditData(
-			dataToEdit ? JSON.parse(JSON.stringify(dataToEdit)) : dataToEdit,
+		const dataToEdit = resumeData[currentTabConfig.dataKey];
+		const clonedData = JSON.parse(
+			JSON.stringify(dataToEdit || (currentTabConfig.isList ? [] : {})),
 		);
+		setEditData(clonedData as EditableData);
 		setIsEditing(true);
-	};
+	}, [resumeData, currentTabConfig]);
 
-	const handleCancel = () => {
+	const handleCancel = useCallback(() => {
 		setIsEditing(false);
 		setEditData(null);
-	};
+	}, []);
 
-	const handleChange = (
-		value: ChangeValue,
-		section?: string,
-		index?: number,
-		field?: string,
-	) => {
-		if (!editData) return;
+	const handleChange = useCallback(
+		(
+			value: ChangeValue,
+			_section?: string, // section is now implicitly activeTab, kept for signature compatibility if needed
+			index?: number,
+			field?: string,
+		) => {
+			if (!editData || !currentTabConfig) return;
 
-		if (activeTab === "userDetails" && !Array.isArray(editData) && field) {
-			setEditData({ ...editData, [field]: value } as UserDetails);
-		} else if (Array.isArray(editData) && typeof index === "number" && field) {
-			const newData = [...editData] as (
-				| WorkExperience
-				| Education
-				| Project
-				| Skill
-			)[];
-			newData[index] = { ...newData[index], [field]: value };
-			setEditData(newData as EditableData);
+			if (
+				currentTabConfig.isList &&
+				Array.isArray(editData) &&
+				typeof index === "number" &&
+				field
+			) {
+				const newList = [...editData] as (
+					| WorkExperience
+					| Education
+					| Project
+					| Skill
+				)[];
+				newList[index] = { ...newList[index], [field]: value };
+				setEditData(newList as EditableData);
+			} else if (
+				!currentTabConfig.isList &&
+				!Array.isArray(editData) &&
+				field
+			) {
+				setEditData({ ...editData, [field]: value } as UserDetails);
+			}
+		},
+		[editData, currentTabConfig],
+	);
+
+	const renderContent = () => {
+		if (!resumeData || !currentTabConfig) return null;
+
+		if (isEditing && editData) {
+			const FormComponent = currentTabConfig.FormComponent;
+			const formOnChange = currentTabConfig.isList
+				? (index: number, field: string, value: ChangeValue) =>
+					handleChange(value, activeTab, index, field)
+				: (field: string, value: ChangeValue) =>
+					handleChange(value, activeTab, undefined, field);
+
+			return <FormComponent data={editData} onChange={formOnChange as any} />;
 		}
-	};
 
-	const renderTab = () => {
-		if (!resumeData || isEditing) return null;
-
-		switch (activeTab) {
-			case "userDetails":
-				return <UserDetailsView data={resumeData.userDetails} />;
-			case "workExperience":
-				return <WorkExperienceView data={resumeData.workExperience} />;
-			case "education":
-				return <EducationView data={resumeData.education} />;
-			case "projects":
-				return <ProjectsView data={resumeData.projects} />;
-			case "skills":
-				return <SkillsView data={resumeData.skills} />;
-			default:
-				return null;
-		}
-	};
-
-	const renderEditForm = () => {
-		if (!isEditing || !editData) return null;
-
-		switch (activeTab) {
-			case "userDetails":
-				return (
-					<UserDetailsForm
-						data={editData as UserDetails}
-						onChange={(field, value) =>
-							handleChange(value, undefined, undefined, field)
-						}
-					/>
-				);
-			case "workExperience":
-				return (
-					<WorkExperienceForm
-						data={editData as WorkExperience[]}
-						onChange={(index, field, value) =>
-							handleChange(value, "workExperience", index, field)
-						}
-					/>
-				);
-			case "education":
-				return (
-					<EducationForm
-						data={editData as Education[]}
-						onChange={(index, field, value) =>
-							handleChange(value, "education", index, field)
-						}
-					/>
-				);
-			case "projects":
-				return (
-					<ProjectsForm
-						data={editData as Project[]}
-						onChange={(index, field, value) =>
-							handleChange(value, "projects", index, field)
-						}
-					/>
-				);
-			case "skills":
-				return (
-					<SkillsForm
-						data={editData as Skill[]}
-						onChange={(index, field, value) =>
-							handleChange(value, "skills", index, field)
-						}
-					/>
-				);
-			default:
-				return null;
-		}
-	};
-
-	const tabLabels = {
-		userDetails: "Personal Details",
-		workExperience: "Work Experience",
-		education: "Education",
-		projects: "Projects",
-		skills: "Skills",
-	};
-
-	const tabIcons = {
-		userDetails: <User className="w-5 h-5 mr-2" />,
-		workExperience: <Briefcase className="w-5 h-5 mr-2" />,
-		education: <GraduationCap className="w-5 h-5 mr-2" />,
-		projects: <FolderOpen className="w-5 h-5 mr-2" />,
-		skills: <Lightbulb className="w-5 h-5 mr-2" />,
+		const ViewComponent = currentTabConfig.ViewComponent;
+		const viewData = resumeData[currentTabConfig.dataKey];
+		return <ViewComponent data={viewData} />;
 	};
 
 	if (!resumeData) {
@@ -262,7 +225,7 @@ export default function ResumeEditor() {
 						No Resume Data Found
 					</h3>
 					<p className="text-gray-600">
-						Please upload a PDF first to get started with editing your resume.
+						Please upload or create a resume to get started.
 					</p>
 				</div>
 			</div>
@@ -272,45 +235,36 @@ export default function ResumeEditor() {
 	return (
 		<div id="resume-editor" className="min-h-screen bg-gray-50">
 			<div className="container mx-auto px-6 py-8">
-				<div className="mb-8">
-					<div className="flex items-center gap-3">
-						<div>
-							<h1 className="text-3xl font-bold text-gray-900">
-								Resume Editor
-							</h1>
-							<p className="text-gray-600">
-								Edit and manage your resume sections
-							</p>
-						</div>
-					</div>
-				</div>
+				<header className="mb-8">
+					<h1 className="text-3xl font-bold text-gray-900">Resume Editor</h1>
+					<p className="text-gray-600">Edit and manage your resume sections</p>
+				</header>
 
-				<div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+				<nav className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
 					<div className="flex overflow-x-auto">
-						{[
-							"userDetails",
-							"workExperience",
-							"education",
-							"projects",
-							"skills",
-						].map((tab) => (
-							<button
-								key={tab}
-								className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === tab
-										? "border-indigo-600 text-indigo-600 bg-indigo-50"
-										: "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-									}`}
-								onClick={() => {
-									setActiveTab(tab);
-									setIsEditing(false);
-								}}
-							>
-								{tabIcons[tab as keyof typeof tabIcons]}
-								{tabLabels[tab as keyof typeof tabLabels]}
-							</button>
-						))}
+						{TAB_ORDER.map((tabKey) => {
+							const tab = TAB_CONFIG[tabKey];
+							const IconComponent = tab.icon;
+							return (
+								<button
+									key={tabKey}
+									className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === tabKey
+											? "border-indigo-600 text-indigo-600 bg-indigo-50"
+											: "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+										}`}
+									onClick={() => {
+										setActiveTab(tabKey);
+										setIsEditing(false); // Reset editing state when switching tabs
+										setEditData(null);
+									}}
+								>
+									<IconComponent className="w-5 h-5 mr-2" />
+									{tab.label}
+								</button>
+							);
+						})}
 					</div>
-				</div>
+				</nav>
 
 				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
 					<div className="flex items-center justify-between">
@@ -382,9 +336,9 @@ export default function ResumeEditor() {
 					</div>
 				</div>
 
-				<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 min-h-96">
-					{isEditing ? renderEditForm() : renderTab()}
-				</div>
+				<main className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 min-h-96">
+					{renderContent()}
+				</main>
 			</div>
 		</div>
 	);

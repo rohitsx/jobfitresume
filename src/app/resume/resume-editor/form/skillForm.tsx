@@ -12,8 +12,6 @@ export default function SkillsForm({
 		const newSkill: Skill = {
 			name: "",
 			category: "Technical",
-			proficiency: "Beginner",
-			yearsOfExperience: 0,
 		};
 		// This is the key issue - we need to pass the entire updated array
 		// to a special handler rather than using the field-level onChange
@@ -60,37 +58,6 @@ export default function SkillsForm({
 								<option value="Language">Language</option>
 								<option value="Other">Other</option>
 							</select>
-						</div>
-						<div>
-							<label className="block text-sm font-medium text-gray-700">
-								Proficiency
-							</label>
-							<select
-								value={skill.proficiency || ""}
-								onChange={(e) => onChange(index, "proficiency", e.target.value)}
-								className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-							>
-								<option value="">Select Proficiency</option>
-								<option value="Beginner">Beginner</option>
-								<option value="Intermediate">Intermediate</option>
-								<option value="Advanced">Advanced</option>
-								<option value="Expert">Expert</option>
-							</select>
-						</div>
-						<div>
-							<label className="block text-sm font-medium text-gray-700">
-								Years of Experience
-							</label>
-							<input
-								type="number"
-								value={skill.yearsOfExperience || ""}
-								onChange={(e) =>
-									onChange(index, "yearsOfExperience", Number(e.target.value))
-								}
-								min="0"
-								step="0.5"
-								className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-							/>
 						</div>
 					</div>
 				</div>

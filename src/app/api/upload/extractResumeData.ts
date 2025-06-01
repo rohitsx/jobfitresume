@@ -12,71 +12,78 @@ export async function extractResumeData(text: string) {
 		contents: `Extract structured data from the following resume text and return it as JSON that matches this TypeScript interface:
   interface ResumeData {
     userDetails: {
-      name: string;
-      email: string;
-      phone?: string;
-      country: string;
-      city?: string;
-      state?: string;
-      currentTitle?: string;
-      summary?: string;
-      workPreference?: "Remote" | "Hybrid" | "On-site";
-      github?: string;
-      linkedin?: string;
-      twitter?: string;
-      website?: string;
+		country: string;
+	name: string;
+	email: string;
+	currentTitle?: string;
+	summary?: string;
+	workPreference?: "Remote" | "Hybrid" | "On-site";
+	github?: string;
+	linkedin?: string;
+	website?: string;
     };
     workExperience: Array<{
-      jobTitle: string;
-      companyName: string;
-      location?: string;
-      WorkStyle: "Freelance" | "Contract" | "Self-employed" | "Full-time" | "Part-time" | "Internship" | "Volunteer";
-      projectName?: string;
-      workLink?: string;
-      startDate: string;
-      endDate?: string;
-      current: boolean;
-      description: string;
-      technologies?: string[];
-      achievements?: string[];
-      industry?: string;
-      teamSize?: number;
-      roleLevel?: "Junior" | "Mid-level" | "Senior" | "Lead" | "Manager";
+	companyName: string;
+	jobTitle: string;
+	location: string;
+	WorkStyle:
+	| "Freelance"
+	| "Contract"
+	| "Self-employed"
+	| "Full-time"
+	| "Part-time"
+	| "Internship"
+	| "Volunteer";
+	startDate: string;
+	endDate?: string;
+	current: boolean;
+	description: string[];
+	technologies?: string[];
+	roleLevel:
+	| "Junior"
+	| "Mid-level"
+	| "Senior"
+	| "Lead"
+	| "Manager"
+	| "Founder"
+	| "CTO";
     }>;
+
     education: Array<{
-      degree: string;
-      major: string;
-      university: string;
-      location?: string;
-      institutionType?: "University" | "College" | "Bootcamp" | "Online Course" | "Certification Program";
-      startDate?: string;
-      endDate?: string;
-      graduationDate?: string;
-      completed: boolean;
-      gpa?: string | null;
-      honors?: string;
-      relevantCourses?: string[];
-      keyLearnings?: string[];
+	degree: string;
+	major: string;
+	university: string;
+	location?: string;
+	institutionType?:
+	| "University"
+	| "College"
+	| "Bootcamp"
+	| "Online Course"
+	| "Certification Program";
+	startDate?: string;
+	endDate?: string;
+	graduationDate?: string;
+	completed: boolean;
+	gpa?: string | null;
     }>;
+
     projects: Array<{
-      title: string;
-      description: string;
-      outcome: string;
-      startDate: string;
-      endDate: string;
-      type?: "Personal" | "Academic" | "Freelance" | "Hackathon" | "Client";
-      role?: string;
-      technologies?: string[];
-      teamSize?: number;
-      repoLink?: string;
-      liveDemoLink?: string;
-      keyLearnings?: string[];
+	title: string;
+	description?: string[];
+	startDate: string;
+	endDate?: string;
+	current: boolean;
+	type?: "Personal" | "Academic" | "Freelance" | "Hackathon";
+	technologies?: string[];
+	link?: {
+		repo?: string;
+		live?: string;
+		demo?: string;
+	};
     }>;
     skills: Array<{
-      name: string;
-      category: "Technical" | "Soft Skill" | "Language" | "Other";
-      proficiency?: "Beginner" | "Intermediate" | "Advanced" | "Expert";
-      yearsOfExperience?: number;
+	name: string;
+	category: string;
     }>;
   }
 

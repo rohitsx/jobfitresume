@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Zap, AlertCircle } from "lucide-react";
-import { getDbRef } from "@/lib/dbRef";
-import { onValue } from "firebase/database";
+import { useResumeStore } from "@/store/useResumeStore";
 
 export default function HandleJd() {
   const router = useRouter();
+  const { resumeData } = useResumeStore();
   const [jobDescription, setJobDescription] = useState("");
   const [isCreatingResume, setIsCreatingResume] = useState(false);
   const [error, setError] = useState("");
@@ -16,53 +16,41 @@ export default function HandleJd() {
       return;
     }
 
-    const defRef = getDbRef();
-    const uid = localStorage.getItem("uid");
+    if (!resumeData) {
+      setError("Please add your resume before proceeding");
+      return;
+    }
 
-    if (!uid) throw new Error("No uid found");
+    try {
+      setIsCreatingResume(true);
+      setError("");
 
-    onValue(defRef, async (snapshot) => {
-      if (snapshot.exists()) {
-        const { resumeData } = snapshot.val();
+      const response = await fetch("/api/make-resume", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ jobDescription, resumeData }),
+      });
 
-        if (!resumeData) {
-          setError("Please add your resume before proceeding");
-          return;
-        }
-
-        try {
-          setIsCreatingResume(true);
-          setError("");
-
-          const response = await fetch("/api/make-resume", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ jobDescription, resumeData }),
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to create resume");
-          }
-
-          const data = await response.json();
-          localStorage.removeItem("generatedResumeData");
-          localStorage.setItem("generatedResumeData", JSON.stringify(data));
-          router.push("/template");
-        } catch (err) {
-          setError("Failed to create resume. Please try again.");
-          console.error(err);
-        } finally {
-          setIsCreatingResume(false);
-        }
+      if (!response.ok) {
+        throw new Error("Failed to create resume");
       }
-    });
+
+      const data = await response.json();
+      localStorage.removeItem("generatedResumeData");
+      localStorage.setItem("generatedResumeData", JSON.stringify(data));
+      router.push("/template");
+    } catch (err) {
+      setError("Failed to create resume. Please try again.");
+      console.error(err);
+    } finally {
+      setIsCreatingResume(false);
+    }
   };
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Header Section */}
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           AI-Powered Resume Generator

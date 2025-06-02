@@ -14,13 +14,7 @@ export default function Experience({
           <div key={index}>
             <div className="flex justify-between items-start ">
               <div>
-                <a
-                  href={data.workLink || ""}
-                  target="_blank"
-                  className="font-semibold"
-                >
-                  {data.companyName}
-                </a>
+                <p className="font-semibold">{data.companyName}</p>
                 <p className=" italic">{data.WorkStyle}</p>
               </div>
               <div className="text-right">
@@ -37,8 +31,8 @@ export default function Experience({
             </div>
 
             <div>
-              {data.achievements &&
-                data.achievements.map((sentence, i) => {
+              {data.description &&
+                data.description.map((sentence, i) => {
                   if (sentence.trim()) {
                     return (
                       <div key={i} className="flex gap-1">

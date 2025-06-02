@@ -1,11 +1,7 @@
 import { LogIn } from "lucide-react";
 import { useRouter } from "next/navigation"; // Use next/navigation for App Router
 
-interface LoginPopupProps {
-	// onLoginClick: () => void; // Or directly use router
-}
-
-export default function LoginPopup({ }: LoginPopupProps) {
+export default function LoginPopup() {
 	const router = useRouter();
 
 	const handleLoginRedirect = () => {

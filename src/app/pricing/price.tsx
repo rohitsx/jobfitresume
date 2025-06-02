@@ -24,7 +24,7 @@ const PricingCard = ({
 		>
 			{popular && (
 				<div className="absolute top-0 left-0 right-0 bg-indigo-500 text-white text-xs font-semibold py-1 text-center">
-					MOST POPULAR
+					Recommended
 				</div>
 			)}
 			<div className={`p-8 ${popular ? "pt-10" : ""}`}>

@@ -13,20 +13,22 @@ export default function ResumeProject({
         {project?.map((data, index) => (
           <div key={index}>
             <div className="flex justify-between items-start">
-              <a
-                href={data.repoLink ? data.repoLink : data.liveDemoLink}
-                className="font-semibold"
-              >
-                {data.title}
-              </a>
+              <p className="font-semibold">{data.title}</p>
               <p>
-                {formatDate(data.startDate)} - {formatDate(data.endDate)}
+                <p>
+                  {formatDate(data.startDate)} -{" "}
+                  {data.current
+                    ? "Present"
+                    : data.endDate
+                      ? formatDate(data.endDate)
+                      : ""}
+                </p>
               </p>
             </div>
 
             <div>
-              {data.achievements &&
-                data.achievements.map((sentence, i) => {
+              {data.description &&
+                data.description.map((sentence, i) => {
                   if (sentence.trim()) {
                     return (
                       <div key={i} className="flex gap-1">

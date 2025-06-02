@@ -69,7 +69,6 @@ export default function PDFUploader({ onUploadSuccess }: PDFUploaderProps) {
 
 			if (res.ok) {
 				const { resume: resumeData } = await res.json();
-				const uid = localStorage.getItem("uid");
 
 				if (!uid) throw new Error("No uid found");
 

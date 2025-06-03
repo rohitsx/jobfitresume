@@ -6,6 +6,7 @@ export default function ResumeProject({
 }: {
   project: Project[] | undefined;
 }) {
+  console.log(project);
   return (
     <div>
       <SectionHeader title="Projects" />
@@ -15,14 +16,12 @@ export default function ResumeProject({
             <div className="flex justify-between items-start">
               <p className="font-semibold">{data.title}</p>
               <p>
-                <p>
-                  {formatDate(data.startDate)} -{" "}
-                  {data.current
-                    ? "Present"
-                    : data.endDate
-                      ? formatDate(data.endDate)
-                      : ""}
-                </p>
+                {formatDate(data.startDate)} -{" "}
+                {data.current
+                  ? "Present"
+                  : data.endDate
+                    ? formatDate(data.endDate)
+                    : ""}
               </p>
             </div>
 

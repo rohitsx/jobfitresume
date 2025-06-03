@@ -1,43 +1,58 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 import { makeResume } from "./makeResume";
+import { getDbRef } from "@/lib/dbRef";
+import { get, update } from "firebase/database";
+import { Prompt } from "./prompt";
 
 export async function POST(req: NextRequest) {
-	// Create path to the file from the root directory
-	const guidelinePath = path.join(
-		process.cwd(),
-		"src",
-		"app",
-		"api",
-		"make-resume",
-		"txt",
-		"guideline.txt",
-	);
+  const body = await req.text();
+  const { uid } = JSON.parse(body);
+  const todayDate = new Date().toISOString().split("T")[0];
 
-	const promptPath = path.join(
-		process.cwd(),
-		"src",
-		"app",
-		"api",
-		"make-resume",
-		"txt",
-		"prompt.txt",
-	);
+  const dbRef = getDbRef(uid);
+  const snapshot = await get(dbRef);
+  const {
+    tier,
+  }: {
+    tier: {
+      count: number;
+      date: string;
+      type: "free" | "Standard" | "Premium";
+    };
+  } = snapshot.val();
 
-	try {
-		const guideline = fs.readFileSync(guidelinePath, "utf8");
-		const prompt = fs.readFileSync(promptPath, "utf8");
-		const updatedPrompt = `${prompt}. 
-			Guideline:
-			${guideline}
-Job Description and User Data:
-${await req.text()}
-`;
-		const resume = await makeResume(updatedPrompt);
-		return NextResponse.json({ resume });
-	} catch (error) {
-		console.error("error reading file", error);
-		return NextResponse.json({ error: "Failed to read file" }, { status: 500 });
-	}
+  let tierCount = tier.count;
+  new Date(todayDate) > new Date(tier.date) && (tierCount = 0);
+
+  if (todayDate == tier.date) {
+    if (tier.type === "free" && tier.count > 3)
+      return NextResponse.json(
+        { error: "Free tier limit reached" },
+        { status: 403 },
+      );
+
+    if (tier.type === "Standard" && tier.count > 20)
+      return NextResponse.json(
+        { error: "Standard tier limit reached" },
+        { status: 403 },
+      );
+  } else {
+    tierCount++;
+  }
+
+  try {
+    const updatedPrompt = `${Prompt}. 
+			Job Description and User Data:
+			${body}
+			`;
+    const resume = await makeResume(updatedPrompt);
+
+    await update(dbRef, {
+      tier: { count: tierCount, date: todayDate, type: tier.type },
+    });
+    return NextResponse.json({ resume });
+  } catch (error) {
+    console.error("error reading file", error);
+    return NextResponse.json({ error: "Failed to read file" }, { status: 500 });
+  }
 }

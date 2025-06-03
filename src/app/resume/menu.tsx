@@ -1,33 +1,40 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PDFUploader from "./PDFUploader";
 import HandleJd from "./handleJd";
 import { FileText, Briefcase } from "lucide-react";
 import { useResumeStore } from "@/store/useResumeStore";
-import { ResumeData } from "@/types/types";
 import ResumeEditor from "./resume-editor/editor";
 
-export default function Menu({
-  uid,
-  resumeData,
-}: {
-  uid: string;
-  resumeData: ResumeData | undefined;
-}) {
-  const { setUid, setResumeData } = useResumeStore();
+import { getDbRef } from "@/lib/dbRef";
+import { get } from "firebase/database";
+
+export default function Menu({ uid, edit }: { uid: string; edit: boolean }) {
+  const { setUid, setResumeData, resumeData } = useResumeStore();
   const [hasResumeData, setHasResumeData] = useState<boolean | null>(null);
   const [activeTab, setActiveTab] = useState<"resume" | "jd">(() =>
-    resumeData ? "jd" : "resume",
+    edit ? "resume" : "jd",
   );
 
   useEffect(() => {
     setUid(uid);
+    const getResumeData = async () => {
+      const dbRef = getDbRef(uid);
+      const snapshot = await get(dbRef);
+      const data = snapshot.val();
+      setResumeData(data.resumeData);
+    };
 
+    getResumeData();
+  }, []);
+
+  useEffect(() => {
     if (resumeData) {
+      console.log(resumeData);
       setResumeData(resumeData);
       setHasResumeData(true);
     }
-  }, [uid, resumeData, setUid, setResumeData]);
+  }, [resumeData]);
 
   const handleUploadSuccess = () => {
     setHasResumeData(true);

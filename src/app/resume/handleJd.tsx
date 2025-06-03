@@ -7,6 +7,7 @@ export default function HandleJd() {
   const router = useRouter();
   const { resumeData } = useResumeStore();
   const [jobDescription, setJobDescription] = useState("");
+  const { uid } = useResumeStore();
   const [isCreatingResume, setIsCreatingResume] = useState(false);
   const [error, setError] = useState("");
 
@@ -30,14 +31,17 @@ export default function HandleJd() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ jobDescription, resumeData }),
+        body: JSON.stringify({ jobDescription, resumeData, uid }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to create resume");
+        return data.error == "Free tier limit reached"
+          ? setError(data.error)
+          : setError("Failed to create resume. Please try again.");
       }
 
-      const data = await response.json();
       localStorage.removeItem("generatedResumeData");
       localStorage.setItem("generatedResumeData", JSON.stringify(data));
       router.push("/template");

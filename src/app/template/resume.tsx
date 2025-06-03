@@ -42,9 +42,11 @@ export default function ResumeComponent() {
         <GreyLine>
           <ResumeHeader userDetails={userDetails} />
         </GreyLine>
-        <GreyLine>
-          <Summary summary={userDetails.summary} />
-        </GreyLine>
+        {userDetails.summary && (
+          <GreyLine>
+            <Summary summary={userDetails.summary} />
+          </GreyLine>
+        )}
         {workExperience.length > 0 && (
           <GreyLine>
             <Experience experience={workExperience} />

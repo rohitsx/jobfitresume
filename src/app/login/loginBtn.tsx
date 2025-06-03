@@ -6,6 +6,7 @@ import { getAuth } from "firebase/auth";
 import { Loader2, LogIn } from "lucide-react";
 import { useCallback, useState } from "react";
 import { getDbRef } from "@/lib/dbRef";
+import { useResumeStore } from "@/store/useResumeStore";
 
 export default function LoginBtn({
   onLoginClickAction,
@@ -21,6 +22,7 @@ export default function LoginBtn({
   }) => Promise<void>;
 }) {
   const [isLoading, setIsLoading] = useState(false);
+  const { setUid, setResumeData } = useResumeStore();
 
   const handleAuth = useCallback(async () => {
     setIsLoading(true);
@@ -40,16 +42,17 @@ export default function LoginBtn({
       const dbRef = getDbRef(uid);
       const snapshot = await get(dbRef);
       const data = snapshot.val();
-      console.log(data);
 
       if (!data || !data.email) {
         await set(dbRef, {
           name: displayName,
           email,
+          tier: "free",
         });
       }
 
-      localStorage.setItem("uid", uid);
+      setUid(uid);
+      setResumeData(data.resumeData);
 
       await onLoginClickAction({
         uid,
@@ -57,7 +60,8 @@ export default function LoginBtn({
         displayName,
       });
 
-      window.location.href = "/resume";
+      if (data.resumeData) return (window.location.href = "/resume");
+      return (window.location.href = "/resume?edit=true");
     } catch (e) {
       console.error("Authentication or data storage error:", e);
     } finally {

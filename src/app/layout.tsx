@@ -18,16 +18,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JobFit Resume | AI-Powered Resume Tailoring to Land Your Dream Job",
+  title: "JobFit Resume",
   description:
-    "Create perfectly tailored resumes in minutes with JobFit Resume. Our AI, powered by Gemini and other top models, analyzes job descriptions to help you stand out and get hired faster.",
+    "Create Job ready tailored resumes in minutes with JobFit Resume.",
   keywords:
-    "AI resume builder, tailored resume, custom resume, job description resume, resume optimization, Gemini resume, stand out resume, get hired faster, resume AI, Next.js resume tool",
+    "AI resume builder, tailored resume, custom resume, job description resume, job fit resume, jobfitresume, JobFit Resume, JobFitResume, Job Fit Resume , resume optimization, Gemini resume, stand out resume, get hired faster, resume AI, Next.js resume tool",
   icons: {
     icon: "/icon.ico",
   },
   openGraph: {
-    title: "JobFit Resume | AI-Powered Resume Tailoring",
+    title: "JobFit Resume",
     description:
       "Instantly craft job-winning resumes with AI. Analyze job descriptions and customize your resume to perfection.",
     type: "website",

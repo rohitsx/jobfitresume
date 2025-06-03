@@ -132,11 +132,10 @@ export default function NavBar({ userData }: { userData: UserData }) {
       closeUserMenuImmediately(); // Close menu immediately
       await deleteAuthCookies();
       localStorage.clear();
-      window.location.replace("/login");
+      window.location.replace("/");
     } catch (error) {
       console.error("Logout failed:", error);
       setIsLoggingOut(false);
-      // Optionally show an error message to the user
     }
   };
 

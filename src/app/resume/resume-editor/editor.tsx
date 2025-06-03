@@ -102,6 +102,7 @@ const TAB_CONFIG: Record<TabKey, TabConfig> = {
 };
 
 const TAB_ORDER: TabKey[] = [
+  "userDetails",
   "workExperience",
   "education",
   "projects",

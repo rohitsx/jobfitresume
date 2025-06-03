@@ -42,7 +42,7 @@ export const monthlyPlans = [
     cta: "Go Unlimited",
     popular: false,
     paymentLink:
-      "https://test.checkout.dodopayments.com/buy/pdt_nOlqoNZ6bqkzpp3NPSI4Z?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment",
+      "https://test.checkout.dodopayments.com/buy/pdt_y19K80VwWGEWmhVBZIFnV?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment&metadata_uid=",
   },
 ];
 

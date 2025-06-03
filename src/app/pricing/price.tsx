@@ -20,8 +20,7 @@ const PricingCard = ({
   uid: string | undefined;
 }) => {
   const handleClick = () => {
-    if (plan.paymentLink)
-      return (window.location.href = plan.paymentLink + uid);
+    if (uid) return (window.location.href = plan.paymentLink + uid);
 
     window.location.href = "/login";
   };

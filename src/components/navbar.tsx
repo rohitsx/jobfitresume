@@ -129,7 +129,7 @@ export default function NavBar({ userData }: { userData: UserData }) {
   const handleLogout = async () => {
     try {
       setIsLoggingOut(true);
-      closeUserMenuImmediately(); // Close menu immediately
+      closeUserMenuImmediately();
       await deleteAuthCookies();
       localStorage.clear();
       window.location.replace("/");

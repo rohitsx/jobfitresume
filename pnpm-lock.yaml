@@ -26,6 +26,9 @@ importers:
       firebase:
         specifier: ^11.7.3
         version: 11.8.1
+      jobfitresume:
+        specifier: 'link:'
+        version: 'link:'
       lucide-react:
         specifier: ^0.511.0
         version: 0.511.0(react@19.1.0)

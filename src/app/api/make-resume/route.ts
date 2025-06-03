@@ -25,6 +25,8 @@ export async function POST(req: NextRequest) {
   new Date(todayDate) > new Date(tier.date) && (tierCount = 0);
 
   if (todayDate == tier.date) {
+    console.log({ todayDate, tier });
+
     if (tier.type === "free" && tier.count > 3)
       return NextResponse.json(
         { error: "Free tier limit reached" },
@@ -36,10 +38,9 @@ export async function POST(req: NextRequest) {
         { error: "Standard tier limit reached" },
         { status: 403 },
       );
-  } else {
-    tierCount++;
   }
 
+  tierCount++;
   try {
     const updatedPrompt = `${Prompt}. 
 			Job Description and User Data:

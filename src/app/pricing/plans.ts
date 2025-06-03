@@ -25,7 +25,7 @@ export const monthlyPlans = [
     cta: "Go Pro",
     popular: true,
     paymentLink:
-      "https://test.checkout.dodopayments.com/buy/pdt_nOlqoNZ6bqkzpp3NPSI4Z?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment&metadata_uid=",
+      "https://checkout.dodopayments.com/buy/pdt_yda7GzHWDwT5KJgH3oiUm?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment&metadata_uid=",
   },
   {
     name: "Premium",
@@ -42,7 +42,7 @@ export const monthlyPlans = [
     cta: "Go Unlimited",
     popular: false,
     paymentLink:
-      "https://test.checkout.dodopayments.com/buy/pdt_y19K80VwWGEWmhVBZIFnV?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment&metadata_uid=",
+      "https://checkout.dodopayments.com/buy/pdt_yy7tFK8flLJQ7dbeAXfs6?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment&metadata_uid=",
   },
 ];
 
@@ -73,11 +73,11 @@ export const halfYearlyPlans = [
     cta: "Go Pro (Half-Yearly)",
     popular: true,
     paymentLink:
-      "https://test.checkout.dodopayments.com/buy/pdt_nOlqoNZ6bqkzpp3NPSI4Z?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment",
+      "https://checkout.dodopayments.com/buy/pdt_3wvn81kmDCHxuUh4AZcql?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment&metadata_uid=",
   },
   {
     name: "Premium",
-    price: "$99.99", // Approx. $16.67/month * 6, slight discount
+    price: "$99.99",
     priceSuffix: "/ 6 months",
     features: [
       "Unlimited AI-Tailored Resumes",
@@ -90,6 +90,6 @@ export const halfYearlyPlans = [
     cta: "Go Unlimited (Half-Yearly)",
     popular: false,
     paymentLink:
-      "https://test.checkout.dodopayments.com/buy/pdt_nOlqoNZ6bqkzpp3NPSI4Z?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment",
+      "https://checkout.dodopayments.com/buy/pdt_9KkstN9OCBgk5me9zKgVW?quantity=1&redirect_url=https://jobfitresume.vercel.app%2Fverify-payment&metadata_uid=",
   },
 ];

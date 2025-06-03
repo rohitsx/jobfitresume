@@ -9,7 +9,7 @@ export default async function Pricing() {
   return (
     <>
       <main>
-        <PricingSection />
+        <PricingSection uid={uid} />
       </main>
       <Footer />
     </>

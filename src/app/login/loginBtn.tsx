@@ -47,7 +47,11 @@ export default function LoginBtn({
         await set(dbRef, {
           name: displayName,
           email,
-          tier: "free",
+          tier: {
+            count: 0,
+            date: new Date().toISOString().split("T")[0],
+            type: "free",
+          },
         });
       }
 

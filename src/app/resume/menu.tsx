@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PDFUploader from "./PDFUploader";
 import HandleJd from "./handleJd";
 import { FileText, Briefcase } from "lucide-react";

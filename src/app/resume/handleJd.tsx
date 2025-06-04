@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Zap, AlertCircle } from "lucide-react";
+import { Zap, AlertCircle, X, Crown } from "lucide-react";
 import { useResumeStore } from "@/store/useResumeStore";
 
 export default function HandleJd() {
@@ -10,6 +12,7 @@ export default function HandleJd() {
   const { uid } = useResumeStore();
   const [isCreatingResume, setIsCreatingResume] = useState(false);
   const [error, setError] = useState("");
+  const [showPricingPopup, setShowPricingPopup] = useState(false);
 
   const handleCreateResume = async () => {
     if (!jobDescription.trim()) {
@@ -37,9 +40,12 @@ export default function HandleJd() {
       const data = await response.json();
 
       if (!response.ok) {
-        return data.error == "Free tier limit reached"
-          ? setError(data.error)
-          : setError("Failed to create resume. Please try again.");
+        if (data.error === "Free tier limit reached") {
+          setShowPricingPopup(true);
+          return;
+        }
+        setError("Failed to create resume. Please try again.");
+        return;
       }
 
       localStorage.removeItem("generatedResumeData");
@@ -51,6 +57,11 @@ export default function HandleJd() {
     } finally {
       setIsCreatingResume(false);
     }
+  };
+
+  const handleUpgrade = () => {
+    setShowPricingPopup(false);
+    router.push("/pricing");
   };
 
   return (
@@ -124,11 +135,11 @@ export default function HandleJd() {
           )}
 
           {/* Action Button */}
-          <div className="flex justify-center pt-4">
+          <div className="flex flex-col items-center pt-4 space-y-3">
             <button
               className={`group relative px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 flex items-center shadow-lg min-w-64 justify-center ${
                 isCreatingResume
-                  ? "bg-gray-400 cursor-not-allowed scale-100 hover:scale-100"
+                  ? "bg-indigo-600 cursor-not-allowed scale-100 hover:scale-100"
                   : "bg-indigo-600 hover:bg-indigo-700 hover:shadow-xl"
               }`}
               onClick={handleCreateResume}
@@ -136,8 +147,35 @@ export default function HandleJd() {
             >
               {isCreatingResume ? (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                  <span>Creating Your Perfect Resume...</span>
+                  <div className="flex items-center space-x-3">
+                    {/* Relaxing breathing dots animation */}
+                    <div className="flex space-x-1">
+                      <div
+                        className="w-2 h-2 bg-white rounded-full animate-pulse"
+                        style={{
+                          animationDelay: "0ms",
+                          animationDuration: "1500ms",
+                        }}
+                      ></div>
+                      <div
+                        className="w-2 h-2 bg-white rounded-full animate-pulse"
+                        style={{
+                          animationDelay: "200ms",
+                          animationDuration: "1500ms",
+                        }}
+                      ></div>
+                      <div
+                        className="w-2 h-2 bg-white rounded-full animate-pulse"
+                        style={{
+                          animationDelay: "400ms",
+                          animationDuration: "1500ms",
+                        }}
+                      ></div>
+                    </div>
+                    <span className="animate-pulse">
+                      Crafting your perfect resume...
+                    </span>
+                  </div>
                 </>
               ) : (
                 <>
@@ -146,9 +184,83 @@ export default function HandleJd() {
                 </>
               )}
             </button>
+
+            {/* Loading message outside button */}
+            {isCreatingResume && (
+              <div className="text-gray-600 text-sm text-center">
+                This usually takes 30-45 seconds, so sit back and let the AI do
+                the work for you
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Pricing Popup */}
+      {showPricingPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all duration-300 scale-100">
+            <div className="relative p-6">
+              {/* Close Button */}
+              <button
+                onClick={() => setShowPricingPopup(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              {/* Content */}
+              <div className="text-center">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Crown className="w-8 h-8 text-white" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  Free Tier Limit Reached
+                </h3>
+
+                {/* Description */}
+                <p className="text-gray-600 mb-6">
+                  You've used all your free resume generations! Upgrade to
+                  Premium to create unlimited AI-tailored resumes and unlock
+                  advanced features.
+                </p>
+
+                {/* Features List */}
+                <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left">
+                  <h4 className="font-semibold text-gray-800 mb-2">
+                    Premium Benefits:
+                  </h4>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• Unlimited resume generations</li>
+                    <li>• Advanced AI customization</li>
+                    <li>• Premium templates</li>
+                    <li>• Priority support</li>
+                  </ul>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col space-y-3">
+                  <button
+                    onClick={handleUpgrade}
+                    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200 shadow-lg hover:shadow-xl"
+                  >
+                    Upgrade to Premium
+                  </button>
+                  <button
+                    onClick={() => setShowPricingPopup(false)}
+                    className="w-full text-gray-500 hover:text-gray-700 font-medium py-2 px-6 rounded-xl transition-colors duration-200"
+                  >
+                    Maybe Later
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

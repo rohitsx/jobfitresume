@@ -6,15 +6,14 @@ export default function ResumeProject({
 }: {
   project: Project[] | undefined;
 }) {
-  console.log(project);
   return (
     <div>
       <SectionHeader title="Projects" />
       <div className="space-y-2">
         {project?.map((data, index) => (
           <div key={index}>
-            <div className="flex justify-between items-start">
-              <p className="font-semibold">{data.title}</p>
+            <div className="flex justify-between items-start font-semibold">
+              <p>{data.title}</p>
               <p>
                 {formatDate(data.startDate)} -{" "}
                 {data.current
@@ -48,7 +47,8 @@ export default function ResumeProject({
               <div className="flex gap-1">
                 <a>▪</a>
                 <p>
-                  <span>Tech Stack:</span> {data.technologies.join(", ")}
+                  <span className="font-semibold">Tech Stack:</span>{" "}
+                  {data.technologies.join(", ")}
                 </p>
               </div>
             )}

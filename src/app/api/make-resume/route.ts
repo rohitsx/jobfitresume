@@ -25,10 +25,7 @@ export async function POST(req: NextRequest) {
   new Date(todayDate) > new Date(tier.date) && (tierCount = 0);
 
   if (todayDate == tier.date) {
-    console.log({ todayDate, tier });
-
     if (tier.type === "free" && tier.count >= 3) {
-      console.log("working");
       return NextResponse.json(
         { error: "Free tier limit reached" },
         { status: 403 },

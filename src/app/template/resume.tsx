@@ -38,7 +38,7 @@ export default function ResumeComponent() {
   return (
     <div className="max-w-4xl mx-auto  p-6  bg-white print:w-4xl print:p-0 print:m-0 ">
       <DowloadPdf username={userDetails.name} />
-      <div className=" bg-white font-serif break-words p-6 px-8 text-sm space-y-4 text-gray-600   border border-gray-200 print:border-none print:w-[1120px] print:mt-6">
+      <div className=" bg-white  break-words p-6 px-8 text-sm space-y-4 text-gray-600   border border-gray-200 print:border-none print:w-[1120px] print:mt-6">
         <GreyLine>
           <ResumeHeader userDetails={userDetails} />
         </GreyLine>

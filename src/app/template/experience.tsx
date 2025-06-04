@@ -15,10 +15,10 @@ export default function Experience({
             <div className="flex justify-between items-start ">
               <div>
                 <p className="font-semibold">{data.companyName}</p>
-                <p className=" italic">{data.WorkStyle}</p>
+                <p className=" italic">{data.workStyle}</p>
               </div>
               <div className="text-right">
-                <p>
+                <p className="font-semibold">
                   {formatDate(data.startDate)} -{" "}
                   {data.current
                     ? "Present"
@@ -52,7 +52,8 @@ export default function Experience({
                 <div className="flex gap-1">
                   <a>▪</a>
                   <p>
-                    <span>Tech Stack:</span> {data.technologies.join(", ")}
+                    <span className="font-semibold">Tech Stack:</span>{" "}
+                    {data.technologies.join(", ")}
                   </p>
                 </div>
               )}

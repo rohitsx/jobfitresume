@@ -2,7 +2,7 @@ export interface WorkExperience {
   companyName: string;
   jobTitle: string;
   location: string;
-  WorkStyle:
+  workStyle:
     | "Freelance"
     | "Contract"
     | "Self-employed"
@@ -23,6 +23,11 @@ export interface WorkExperience {
     | "Manager"
     | "Founder"
     | "CTO";
+  link?: {
+    repo?: string;
+    live?: string;
+    demo?: string;
+  };
 }
 
 export interface Education {

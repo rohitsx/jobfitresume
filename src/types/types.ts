@@ -28,6 +28,7 @@ export interface WorkExperience {
     live?: string;
     demo?: string;
   };
+  keywords?: [string, string, string, string?];
 }
 
 export interface Education {
@@ -61,6 +62,7 @@ export interface Project {
     live?: string;
     demo?: string;
   };
+  keywords?: [string, string, string, string?];
 }
 
 export interface UserDetails {

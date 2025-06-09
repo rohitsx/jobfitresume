@@ -56,7 +56,7 @@ export default function LoginBtn({
       }
 
       setUid(uid);
-      setResumeData(data.resumeData);
+      if (data.resumeData) setResumeData(data.resumeData);
 
       await onLoginClickAction({
         uid,

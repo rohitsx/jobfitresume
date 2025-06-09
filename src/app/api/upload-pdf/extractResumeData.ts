@@ -5,28 +5,15 @@ export async function extractResumeData(text: string) {
 	const ai = new GoogleGenAI({
 		apiKey: env.geminiApiKey,
 	});
-	console.log(text);
 
 	const response = await ai.models.generateContent({
 		model: "gemini-1.5-flash-8b",
 		contents: `Extract structured data from the following resume text and return it as JSON that matches this TypeScript interface:
-  interface ResumeData {
-    userDetails: {
-		country: string;
-	name: string;
-	email: string;
-	currentTitle?: string;
-	summary?: string;
-	workPreference?: "Remote" | "Hybrid" | "On-site";
-	github?: string;
-	linkedin?: string;
-	website?: string;
-    };
-    workExperience: Array<{
+export interface WorkExperience {
 	companyName: string;
 	jobTitle: string;
 	location: string;
-	WorkStyle:
+	workStyle:
 	| "Freelance"
 	| "Contract"
 	| "Self-employed"
@@ -47,9 +34,15 @@ export async function extractResumeData(text: string) {
 	| "Manager"
 	| "Founder"
 	| "CTO";
-    }>;
+	link?: {
+		repo?: string;
+		live?: string;
+		demo?: string;
+	};
+	keywords?: [string, string, string, string?];
+}
 
-    education: Array<{
+export interface Education {
 	degree: string;
 	major: string;
 	university: string;
@@ -65,9 +58,9 @@ export async function extractResumeData(text: string) {
 	graduationDate?: string;
 	completed: boolean;
 	gpa?: string | null;
-    }>;
+}
 
-    projects: Array<{
+export interface Project {
 	title: string;
 	description?: string[];
 	startDate: string;
@@ -80,12 +73,25 @@ export async function extractResumeData(text: string) {
 		live?: string;
 		demo?: string;
 	};
-    }>;
-    skills: Array<{
+	keywords?: [string, string, string, string?];
+}
+
+export interface UserDetails {
 	name: string;
-	category: string;
-    }>;
-  }
+	currentTitle?: string;
+	summary?: string;
+	email: string;
+	country: string;
+	workPreference?: "Remote" | "Hybrid" | "On-site";
+	github?: string;
+	linkedin?: string;
+	website?: string;
+}
+
+export interface Skill {
+	name: string;
+	category?: string;
+}
 
   Rules:
   1. Return only valid JSON that matches this structure

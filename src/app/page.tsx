@@ -3,17 +3,22 @@ import FeaturesSection from "@/components/feature";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero";
 import HowItWorksSection from "@/components/howItWork";
+import NavBar from "@/components/navbar";
+import { getCookies } from "@/lib/getCookies";
 
-export default function LandingPage() {
-	return (
-		<>
-			<main className="flex-grow">
-				<HeroSection />
-				<FeaturesSection />
-				<HowItWorksSection />
-				<FaqSection />
-			</main>
-			<Footer />
-		</>
-	);
+export default async function LandingPage() {
+  const userData = await getCookies();
+
+  return (
+    <>
+      <NavBar userData={userData} />
+      <main className="flex-grow">
+        <HeroSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <FaqSection />
+      </main>
+      <Footer />
+    </>
+  );
 }

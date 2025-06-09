@@ -1,4 +1,4 @@
-import { Education } from "@/types/types";
+import { Education } from "@/types/ResumeData.types";
 import { formatDate, SectionHeader } from "./components";
 
 export default function ResumeEducation({

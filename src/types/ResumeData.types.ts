@@ -13,7 +13,7 @@ export interface WorkExperience {
   startDate: string;
   endDate?: string;
   current: boolean;
-  description: string[];
+  description: string;
   technologies?: string[];
   roleLevel:
     | "Junior"
@@ -66,11 +66,11 @@ export interface Project {
 }
 
 export interface UserDetails {
-  country: string;
   name: string;
-  email: string;
   currentTitle?: string;
   summary?: string;
+  email: string;
+  country: string;
   workPreference?: "Remote" | "Hybrid" | "On-site";
   github?: string;
   linkedin?: string;
@@ -79,7 +79,7 @@ export interface UserDetails {
 
 export interface Skill {
   name: string;
-  category: string;
+  category?: string;
 }
 
 export interface ResumeData {
@@ -89,48 +89,3 @@ export interface ResumeData {
   projects: Project[];
   skills: Skill[];
 }
-
-export type IconName =
-  | "AI"
-  | "TIME"
-  | "STAR"
-  | "EASY"
-  | "UPLOAD"
-  | "EDIT"
-  | "PASTE"
-  | "MAGIC";
-
-export interface IconProps {
-  name: IconName;
-}
-
-export type EditableData =
-  | UserDetails
-  | WorkExperience[]
-  | Education[]
-  | Project[]
-  | Skill[];
-
-export type ChangeValue =
-  | string
-  | boolean
-  | number
-  | string[]
-  | WorkExperience
-  | Education
-  | Project
-  | Skill;
-
-// export type ViewComponent =
-//   | React.FC<{ data: UserDetails }>
-//   | React.FC<{ data: WorkExperience[] }>
-//   | React.FC<{ data: Education[] }>
-//   | React.FC<{ data: Skill[] }>
-//   | React.FC<{ data: Project[] }>;
-
-export type ViewComponent<T = any> = React.FC<{ data: T }>;
-
-export type FormComponent<T = any> = React.FC<{
-  data: T;
-  onChange: (...args: T[]) => void;
-}>;

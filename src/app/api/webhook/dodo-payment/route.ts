@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { getDbRef } from "@/lib/dbRef";
 import { get, update } from "firebase/database";
-import { type } from "os";
 
 const webhook = new Webhook(process.env.DODO_WEBHOOK_KEY!);
 

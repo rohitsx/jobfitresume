@@ -1,4 +1,4 @@
-import { WorkExperience } from "@/types/types";
+import { WorkExperience } from "@/types/ResumeData.types";
 import { formatDate, SectionHeader } from "./components";
 import { convertToStrong } from "@/lib/convertToStrong";
 

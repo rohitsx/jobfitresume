@@ -74,9 +74,18 @@ export const useResumeStore = create<ResumeStore>((set) => ({
 
 				if (state.draftData) {
 					let current: any = state.draftData;
+
 					for (let i = 0; i < path.length - 1; i++) {
-						current = current[path[i]];
+						const key = path[i];
+						const nextKey = path[i + 1];
+						const isNextArrayIndex = typeof nextKey === "number";
+
+						if (current[key] === undefined) {
+							current[key] = isNextArrayIndex ? [] : {};
+						}
+						current = current[key];
 					}
+
 					current[path[path.length - 1]] = value;
 				}
 			}),

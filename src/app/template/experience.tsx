@@ -43,7 +43,7 @@ export default function Experience({
 						</div>
 
 						<div className="px-2">
-							{data.description &&
+							{Array.isArray(data.description) &&
 								data.description.map((sentence, i) => {
 									if (sentence.trim()) {
 										return (

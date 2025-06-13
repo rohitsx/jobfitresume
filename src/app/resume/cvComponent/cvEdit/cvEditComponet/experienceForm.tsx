@@ -93,14 +93,16 @@ export const ExperienceForm = ({ experience, index }: ExperienceFormProps) => {
 				checked={experience.current}
 				path={[...path, "current"]}
 			/>
-			<FormField label="Description" fullWidth>
-				<TextArea
-					input={{
-						defaultValue: experience.description,
-						path: [...path, "description"],
-					}}
-				/>
-			</FormField>
+			{typeof experience.description === "string" && (
+				<FormField label="Description" fullWidth>
+					<TextArea
+						input={{
+							defaultValue: experience.description,
+							path: [...path, "description"],
+						}}
+					/>
+				</FormField>
+			)}
 			<FormField label="Keywords (comma-separated)" fullWidth>
 				<InputCommaSeparated
 					input={{

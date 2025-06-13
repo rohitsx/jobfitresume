@@ -14,11 +14,11 @@ export default async function Layout({
 
   return (
     <div className="bg-gray-50 text-lg text-gray-500 min-h-screen flex">
-      <div className="hidden lg:block lg:fixed lg:w-[300px] xl:w-[400px] h-full overflow-auto">
+      <div className="hidden h-full lg:block lg:fixed">
         <SideBar uid={uid} />
       </div>
 
-      <main className="flex-1 w-full lg:ml-[300px] xl:ml-[400px] pt-2">
+      <main className="flex-1 w-full pt-2 lg:ml-65 xl:ml-75 2xl:ml-85">
         {children}
       </main>
     </div>

@@ -2,7 +2,10 @@ import { Skill } from "@/types/ResumeData.types";
 import { SectionHeader } from "./components";
 
 export default function ResumeSkills({ skills }: { skills: Skill[] }) {
-	const skillCategories = Object.groupBy(skills, ({ category }) => category);
+	const skillCategories = Object.groupBy(
+		skills,
+		({ category }) => category || "",
+	);
 	const categories = Object.keys(skillCategories);
 
 	return (

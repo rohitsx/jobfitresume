@@ -1,19 +1,20 @@
 export const ActionBar = ({
-  onSave,
-  hasChanges,
+	onSave,
+	hasChanges,
 }: {
-  onSave: () => void;
-  hasChanges: boolean;
+	onSave: () => void;
+	hasChanges: boolean;
 }) => (
-  <div className="sticky bottom-0 z-10 bg-white/80 backdrop-blur-sm p-4 border-t border-gray-200">
-    <div className="max-w-4xl mx-auto flex justify-end items-center gap-4">
-      <button
-        onClick={onSave}
-        disabled={!hasChanges}
-        className="px-4 py-2 text-sm  text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
-      >
-        Save Changes
-      </button>
-    </div>
-  </div>
+	<div className="fixed bottom-0 w-5/6 backdrop-blur-xs bg-white/60 pb-6 pt-4 pr-38 border-t border-t-gray-200 flex justify-end ">
+		<button
+			onClick={onSave}
+			disabled={!hasChanges}
+			className={`border border-gray-200  rounded-xl w-xs text-white p-3 shadow-lg hover:shadow-xl transition flex justify-center items-center gap-2 duration-300 ease-in-out ${hasChanges
+				? "bg-indigo-600 cursor-pointer"
+				: "bg-indigo-400 cursor-not-allowed"
+				}`}
+		>
+			Save Changes
+		</button>
+	</div>
 );

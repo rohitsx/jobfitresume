@@ -10,7 +10,6 @@ import {
 
 export const EducationForm = ({ education, index }: EducationFormProps) => {
 	const path = ["education", index];
-
 	return (
 		<CellContainer>
 			<FormField label="University / Institution">

@@ -12,7 +12,6 @@ import {
 
 export const ProjectForm = ({ project, index }: ProjectFormProps) => {
 	const path = ["projects", index];
-
 	return (
 		<CellContainer>
 			<FormField label="Project Title" fullWidth>
@@ -50,6 +49,7 @@ export const ProjectForm = ({ project, index }: ProjectFormProps) => {
 			<FormField label="Description" fullWidth>
 				<TextArea
 					input={{
+						// @ts-ignore
 						defaultValue: project.description,
 						path: [...path, "description"],
 					}}

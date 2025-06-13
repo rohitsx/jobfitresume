@@ -1,4 +1,4 @@
-import { UserDetails } from "@/types/ResumeData.types";
+import { UserDetailsFormProps } from "@/types/Form.types";
 import {
 	FormField,
 	InputText,
@@ -7,13 +7,8 @@ import {
 	CellContainer,
 } from "./help/formComponents";
 
-interface UserDetailsFormProps {
-	userDetails: UserDetails;
-}
-
 export const UserDetailsForm = ({ userDetails }: UserDetailsFormProps) => {
 	const path = ["userDetails"];
-
 	return (
 		<CellContainer>
 			<FormField label="Full Name">

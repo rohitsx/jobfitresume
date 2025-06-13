@@ -1,103 +1,133 @@
 import { create } from "zustand";
 import { produce } from "immer";
-import { ResumeDataPayload, ResumeStore } from "@/types/Store.types";
-import { ResumeData } from "@/types/ResumeData.types";
+import { ResumeStore } from "@/types/Store.types";
+import { WorkExperience, Education, Project } from "@/types/ResumeData.types";
 
-// Default objects for new entries, ensuring they satisfy their types.
-const defaultWorkExperience = {
-	companyName: "",
-	jobTitle: "",
-	location: "",
-	workStyle: "Full-time" as const,
-	startDate: new Date().toISOString().slice(0, 10),
-	current: false,
-	description: "",
-	roleLevel: "Junior" as const,
+const defaultWorkExperience: WorkExperience = {
+  companyName: "",
+  jobTitle: "",
+  location: "",
+  workStyle: "Full-time" as const,
+  startDate: new Date().toISOString().slice(0, 10),
+  current: false,
+  description: "",
+  roleLevel: "Junior" as const,
+};
+const defaultEducation: Education = {
+  degree: "",
+  major: "",
+  university: "",
+  completed: false,
+  institutionType: "University" as const,
+  startDate: new Date().toISOString().slice(0, 10),
+};
+const defaultProject: Project = {
+  title: "",
+  startDate: new Date().toISOString().slice(0, 10),
+  current: false,
+  type: "Personal" as const,
 };
 
-const defaultEducation = {
-	degree: "",
-	major: "",
-	university: "",
-	completed: false,
-	institutionType: "University" as const,
-	startDate: new Date().toISOString().slice(0, 10),
+const ensureDraftExists = (state: ResumeStore) => {
+  if (!state.draftData && state.resumeData) {
+    state.draftData = JSON.parse(JSON.stringify(state.resumeData));
+  }
 };
 
-const defaultProject = {
-	title: "",
-	startDate: new Date().toISOString().slice(0, 10),
-	current: false,
-	type: "Personal" as const,
-};
+export const useResumeStore = create<ResumeStore>((set) => ({
+  resumeData: undefined,
+  draftData: null,
+  uid: undefined,
 
-export const useResumeStore = create<ResumeStore>((set, get) => ({
-	resumeData: undefined,
-	uid: undefined,
+  setResumeData: (data) => set({ resumeData: data, draftData: null }),
+  setUid: (uid) => set({ uid }),
+  clearResumeData: () =>
+    set({ resumeData: undefined, draftData: null, uid: undefined }),
+  startEditing: () =>
+    set((state) => {
+      if (!state.draftData && state.resumeData) {
+        return { draftData: JSON.parse(JSON.stringify(state.resumeData)) };
+      }
+      return {};
+    }),
 
-	setResumeData: (data: ResumeData) => set({ resumeData: data }),
+  discardChanges: () =>
+    set((state) => {
+      if (state.resumeData) {
+        return { draftData: JSON.parse(JSON.stringify(state.resumeData)) };
+      }
+      return { draftData: null };
+    }),
 
-	setUid: (uid: string) => set({ uid }),
+  saveChanges: () =>
+    set((state) => {
+      if (state.draftData) {
+        return { resumeData: state.draftData, draftData: null }; // Go back to "viewing" mode after save
+      }
+      return {};
+    }),
 
-	clearResumeData: () => set({ resumeData: undefined, uid: undefined }),
+  updateDraftData: ({ path, value }) => {
+    set(
+      produce((state: ResumeStore) => {
+        ensureDraftExists(state);
 
-	updateResumeData: ({ path, value }: ResumeDataPayload) => {
-		set(
-			produce((state: ResumeStore) => {
-				if (state.resumeData) {
-					let current: any = state.resumeData;
-					// Traverse the path to the second-to-last element
-					for (let i = 0; i < path.length - 1; i++) {
-						current = current[path[i]];
-					}
-					// Set the value on the final key
-					current[path[path.length - 1]] = value;
-				}
-			}),
-		);
-	},
+        if (state.draftData) {
+          let current: any = state.draftData;
+          for (let i = 0; i < path.length - 1; i++) {
+            current = current[path[i]];
+          }
+          current[path[path.length - 1]] = value;
+        }
+      }),
+    );
+  },
 
-	// --- Type-Safe Array Actions ---
+  addWorkExperience: () =>
+    set(
+      produce((state: ResumeStore) => {
+        ensureDraftExists(state);
+        state.draftData?.workExperience.push(defaultWorkExperience);
+      }),
+    ),
 
-	addWorkExperience: () =>
-		set(
-			produce((state: ResumeStore) => {
-				state.resumeData?.workExperience.push(defaultWorkExperience);
-			}),
-		),
+  removeWorkExperience: (index) =>
+    set(
+      produce((state: ResumeStore) => {
+        ensureDraftExists(state);
+        state.draftData?.workExperience.splice(index, 1);
+      }),
+    ),
 
-	removeWorkExperience: (index: number) =>
-		set(
-			produce((state: ResumeStore) => {
-				state.resumeData?.workExperience.splice(index, 1);
-			}),
-		),
+  addEducation: () =>
+    set(
+      produce((state: ResumeStore) => {
+        ensureDraftExists(state);
+        state.draftData?.education.push(defaultEducation);
+      }),
+    ),
 
-	addEducation: () =>
-		set(
-			produce((state: ResumeStore) => {
-				state.resumeData?.education.push(defaultEducation);
-			}),
-		),
+  removeEducation: (index) =>
+    set(
+      produce((state: ResumeStore) => {
+        ensureDraftExists(state);
+        state.draftData?.education.splice(index, 1);
+      }),
+    ),
 
-	removeEducation: (index: number) =>
-		set(
-			produce((state: ResumeStore) => {
-				state.resumeData?.education.splice(index, 1);
-			}),
-		),
+  addProject: () =>
+    set(
+      produce((state: ResumeStore) => {
+        ensureDraftExists(state);
+        state.draftData?.projects.push(defaultProject);
+      }),
+    ),
 
-	addProject: () =>
-		set(
-			produce((state: ResumeStore) => {
-				state.resumeData?.projects.push(defaultProject);
-			}),
-		),
-
-	removeProject: (index: number) =>
-		set(
-			produce((state: ResumeStore) => {
-				state.resumeData?.projects.splice(index, 1);
-			}),
-		),
+  removeProject: (index) =>
+    set(
+      produce((state: ResumeStore) => {
+        ensureDraftExists(state);
+        state.draftData?.projects.splice(index, 1);
+      }),
+    ),
 }));

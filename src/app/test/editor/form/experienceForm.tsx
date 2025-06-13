@@ -12,7 +12,6 @@ import {
 
 export const ExperienceForm = ({ experience, index }: ExperienceFormProps) => {
 	const path = ["workExperience", index];
-
 	return (
 		<CellContainer>
 			<FormField label="Company Name">
@@ -105,9 +104,10 @@ export const ExperienceForm = ({ experience, index }: ExperienceFormProps) => {
 			<FormField label="Keywords (comma-separated)" fullWidth>
 				<InputCommaSeparated
 					input={{
+						// @ts-ignore
 						defaultValue: experience.keywords,
 						path: [...path, "keywords"],
-						placeholder: "e.g., Agile, Scrum, Project Management",
+						placeholder: "e.g., Agile, Scrum",
 					}}
 				/>
 			</FormField>

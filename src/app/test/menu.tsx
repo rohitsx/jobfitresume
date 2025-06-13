@@ -111,7 +111,7 @@ export default function Menu({ uid, edit }: { uid: string; edit: boolean }) {
 					<div className="transition-all duration-300 ease-in-out mt-6 lg:mt-2">
 						{activeTab === "resume" && (
 							<div className="resume-section animate-fadeIn">
-								{/* <PDFUploader onUploadSuccess={handleUploadSuccess} /> */}
+								<PDFUploader onUploadSuccess={handleUploadSuccess} />
 								{hasResumeData && <ResumeEditor />}
 							</div>
 						)}

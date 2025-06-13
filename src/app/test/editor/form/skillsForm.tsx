@@ -1,42 +1,31 @@
-import { Skill } from "@/types/ResumeData.types";
+import { SkillsFormProps } from "@/types/Form.types";
 import { useResumeStore } from "@/store/useResumeStore";
 import { FormField } from "./help/formComponents";
 import { useEffect, useState } from "react";
 
-interface SkillsFormProps {
-	skills: Skill[];
-}
-
 export const SkillsForm = ({ skills }: SkillsFormProps) => {
-	const updateResumeData = useResumeStore((state) => state.updateResumeData);
-
-	// Use local state to manage the input string for better performance
+	const updateDraftData = useResumeStore((state) => state.updateDraftData);
 	const [skillsString, setSkillsString] = useState(
 		skills.map((s) => s.name).join(", "),
 	);
 
-	// Sync local state if the global state changes from an external source
 	useEffect(() => {
 		setSkillsString(skills.map((s) => s.name).join(", "));
 	}, [skills]);
 
 	const handleBlur = () => {
-		// On blur, transform the string into Skill[] and update the global store
 		const skillObjects = skillsString
 			.split(",")
 			.map((name) => name.trim())
-			.filter(Boolean) // Remove any empty strings
-			.map((name) => ({ name })); // Transform into Skill objects
-
-		// Update the entire skills array in the store
-		updateResumeData({ path: ["skills"], value: skillObjects });
+			.filter(Boolean)
+			.map((name) => ({ name }));
+		updateDraftData({ path: ["skills"], value: skillObjects });
 	};
 
 	return (
 		<div className="p-4">
 			<FormField label="Skills (comma-separated)">
-				<input
-					type="text"
+				<textarea
 					value={skillsString}
 					onChange={(e) => setSkillsString(e.target.value)}
 					onBlur={handleBlur}

@@ -114,29 +114,11 @@ export const ExperienceForm = ({ experience, index }: ExperienceFormProps) => {
 				/>
 			</FormField>
 
-			<FormField label="Repo Link" fullWidth>
+			<FormField label="Live" fullWidth>
 				<InputText
 					input={{
-						defaultValue: experience.link?.repo,
-						path: [...path, "link", "repo"],
-					}}
-				/>
-			</FormField>
-
-			<FormField label="Live Link" fullWidth>
-				<InputText
-					input={{
-						defaultValue: experience.link?.live,
-						path: [...path, "link", "live"],
-					}}
-				/>
-			</FormField>
-
-			<FormField label="demo Link (Video Demo)" fullWidth>
-				<InputText
-					input={{
-						defaultValue: experience.link?.demo,
-						path: [...path, "link", "demo"],
+						defaultValue: experience.live,
+						path: [...path, "link"],
 					}}
 				/>
 			</FormField>

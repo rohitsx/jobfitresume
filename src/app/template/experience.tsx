@@ -1,6 +1,5 @@
 import { WorkExperience } from "@/types/ResumeData.types";
-import { formatDate, SectionHeader } from "./components";
-import { convertToStrong } from "@/lib/convertToStrong";
+import { formatDate, SectionHeader, UrlHtml } from "./components";
 
 export default function Experience({
 	experience,
@@ -15,12 +14,16 @@ export default function Experience({
 					<div key={index} className="space-y-1">
 						<div className="flex justify-between items-start ">
 							<div>
-								<p className="font-semibold">
-									{data.jobTitle} | {data.companyName} - {data.workStyle}
-								</p>
+								<div className="flex gap-1 text-base font-semibold">
+									<p>{data.jobTitle}</p>
+									{data.live && <UrlHtml link={data.live} text="Website" />}
+									<p>
+										| {data.companyName} - {data.workStyle}
+									</p>
+								</div>
 								<div className="flex-wrap flex gap-1 px-1">
 									{data.keywords?.map((keyword, i) => (
-										<p className="italic text-[16px] " key={i}>
+										<p className="italic text-sm" key={i}>
 											{keyword}{" "}
 											{data.keywords && i !== data.keywords.length - 1 && "/ "}
 										</p>
@@ -36,9 +39,7 @@ export default function Experience({
 											? formatDate(data.endDate)
 											: ""}
 								</p>
-								{data.location && (
-									<p className="text-[16px] px-1">{data.location}</p>
-								)}
+								{data.location && <p className=" px-1">{data.location}</p>}
 							</div>
 						</div>
 
@@ -51,7 +52,7 @@ export default function Experience({
 												<a>●</a>
 												<p
 													dangerouslySetInnerHTML={{
-														__html: `${convertToStrong(sentence.trim())}`,
+														__html: sentence.trim(),
 													}}
 												></p>
 											</div>

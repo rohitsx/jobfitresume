@@ -13,7 +13,7 @@ export default function ResumeSkills({ skills }: { skills: Skill[] }) {
 			<SectionHeader title="Skills" />
 			{categories.map((category, index) => (
 				<div key={index} className="flex flex-wrap gap-x-1">
-					<h4 className="font-semibold">{category}: </h4>
+					<h4 className="font-semibold text-base">{category}: </h4>
 					{skillCategories[category]?.map(({ name }, index) => (
 						<p key={index}>{name}, </p>
 					))}

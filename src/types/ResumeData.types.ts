@@ -23,11 +23,7 @@ export interface WorkExperience {
 	| "Manager"
 	| "Founder"
 	| "CTO";
-	link?: {
-		repo?: string;
-		live?: string;
-		demo?: string;
-	};
+	live?: string;
 	keywords?: [string, string, string, string?];
 }
 

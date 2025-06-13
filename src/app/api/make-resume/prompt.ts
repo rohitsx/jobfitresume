@@ -10,28 +10,21 @@ I will provide you with two main inputs:
 Your detailed tasks are:
 
 Phase 1: Analysis & Strategy
-    1.  Deeply Analyze the Job Description: Identify key skills (explicit technical skills, required technologies, and soft skills implied by responsibilities or company culture), responsibilities, experience level (Junior, Mid-level, Senior, etc.), and company priorities. Extract explicit and implicit keywords.
-    2.  Review User's Resume Data: Assess the existing content in \`userDetails\`, \`workExperience\`, \`education\`, \`projects\`, and \`skills\` against the requirements derived from the job description.
+    1.  Deeply Analyze the Job Description: Identify key skills (explicit technical skills, required technologies implied by responsibilities or company culture), responsibilities, experience level (Junior, Mid-level, Senior, etc.), and company priorities. Extract explicit keywords.
+    2.  Review User's Resume Data: Assess the existing content in userDetails, workExperience, education, projects, and skills against the requirements derived from the job description.
 
 Phase 2: Content Selection & Refinement (Adhering to Tech Resume Best Practices)
     1.  Prioritize Relevance: Select only the most relevant information from the user's data that directly aligns with the target job. Omit irrelevant details.
     2.  Work Experience & Projects - The Core:
-        *   Quantity Constraint: The combined total of "Work Experience" entries and "Project" entries in the output resume must not exceed three (3).
+        * Quantity Constraint: This part is very crucial. If the user has a lot of relevant experience and projects, try to include the most impactful ones—but the combined total of experiences and projects must not exceed 4. For example, if there are 2 work experiences, include at most 2 projects. If there are 3 experiences, include only 1 project. Keep bullet points concise to fit within this limit.
+If the user doesn't have many relevant projects, you can increase both the number of words per bullet and the number of bullet points.
         *   Prioritization: Give strong preference to "Work Experience" over "Projects" if both are equally relevant.
-            *   Example: If two work experiences are highly relevant, you can include those two and up to one highly relevant project. If only one project is highly relevant, you can include it and up to two highly relevant work experiences. If all three most impactful items are work experiences, include only those.
         *   Content Crafting (for each selected Work Experience & Project):
             *   Bullet Points: Use concise, impactful bullet points (typically 3-5 per role/project, fewer for older/less relevant ones).
-            *   Action Verbs: Start *every* bullet point with a strong, varied action verb (e.g., Developed, Engineered, Led, Managed, Implemented, Optimized, Designed, Automated, Resolved, Secured).
+            *   Action Verbs: Start every bullet point with a strong, varied action verb (e.g., Developed, Engineered, Led, Managed, Implemented, Optimized, Designed, Automated, Resolved, Secured). However, do not repeat the same verb or follow the same sentence pattern repeatedly.
             *   Quantifiable Achievements (Crucial for Tech): Focus on measurable results and impact. Use metrics, numbers, and specific outcomes.
                 *   Strive for precise quantification (e.g., "Reduced API latency by 30%," "Increased user engagement by 15%," "Managed a team of 5 engineers," "Successfully deployed 10+ microservices").
-                *   Handling Sensitive or Unavailable Data (Anonymizing KPIs & Metrics): When exact figures are confidential, cannot be disclosed, or are not available in the user's input, you MUST still quantify achievements using anonymization techniques. This allows showcasing impact while respecting privacy. Apply these methods to Key Performance Indicators (KPIs). The goal of these anonymization techniques is to create textual representations of impact; strategic highlighting with \`<strong>\` tags will be applied later as a separate step.
-                    *   Swap Exact Numbers for Generalized Figures: For sensitive financial data or large user counts, use general forms. If a currency is specified, retain it in the anonymized figure.
-                        *   *Example:* "Managed an investment portfolio worth $95 million" becomes "Managed a '9X million dollar' portfolio."
-                        *   *Example:* "Increased company revenue from $12 million" becomes "Grew company revenue to 'XX million'."
-                        *   *Example:* "Handling a user base of 90,000 daily active users" becomes "Managed 'XX,000 DAUs'."
-                    *   Use Order of Magnitude or Ranges: For percentages or improvements where precision is not feasible or needs to be obscured.
-                        *   *Example:* "Improved efficiency by 45%" becomes "Enhanced efficiency by '>40%'."
-                        *   *Example:* "Reduced costs by around 13%" becomes "Achieved '~10% cost reduction'."
+                *   Handling Sensitive or Unavailable Data (Anonymizing KPIs & Metrics): When exact figures are confidential, cannot be disclosed, or are not available in the user's input, you MUST still quantify achievements using anonymization techniques. This allows showcasing impact while respecting privacy. 
                     *   Employ Ratios: To illustrate significant scale or improvement.
                         *   *Example:* "Scaled from 120,500 to 840,250 hosts globally" becomes "Delivered a '7x increase' in global host capacity."
                         *   *Example:* "Boosted average trips from 10 to 25.4" becomes "Increased active trips by '2.5x'."
@@ -46,11 +39,8 @@ Phase 2: Content Selection & Refinement (Adhering to Tech Resume Best Practices)
                         *   *Example:* "Increased user engagement by '>30%,' highlighting contribution to growth."
                         *   *Example:* "Improved operational efficiency by '>25%'."
                         *   *Example:* "Reduced costs by '~15%'."
+								*  Place all roles/projects in Reverse chronological order based on the Data and Year.   
                 *   The aim is always to demonstrate the *magnitude* and *impact* of accomplishments, even with anonymized data.
-            *   Strategic Highlighting (using \`<strong>\` tags): Within bullet points in the \`description\` array, identify and wrap the most critical keywords, skills, or quantifiable results (including previously anonymized figures if they are key achievements) directly aligned with the job description using \`<strong>\` and \`</strong>\` HTML tags. This helps draw the reviewer's attention to the most relevant information. *Use this sparingly for maximum impact.*
-                *   *Example:* "Developed a new feature using React and Node.js, resulting in a 15% increase in user engagement."
-                *   *Example:* "Managed a $XX million budget for a portfolio of cloud infrastructure projects." (Here, '$XX million' is an anonymized figure being highlighted.)
-                *   *Example:* "Reduced API latency by 30% by optimizing database queries and implementing caching mechanisms."
             *   PAR/STAR/Result-First Structure: Structure bullet points effectively:
                 *   PAR (Problem-Action-Result): "Reduced customer support response time by 20% (Result) by implementing a new ticketing system (Action) to address slow response issues (Problem)." (Often written Action-Problem-Result or Action-Result for brevity).
                 *   Action Verb + Skill + Result (Common for Tech): "Developed a user-friendly website using React, Node.js, and PostgreSQL (Action/Skill), resulting in a 30% increase in user sign-ups (Result)."
@@ -59,12 +49,9 @@ Phase 2: Content Selection & Refinement (Adhering to Tech Resume Best Practices)
             *   Tense: Use present tense for current roles/projects, past tense for completed ones.
             *   Relevance First: Order bullet points within each experience/project with the most relevant to the target job listed first.
     3.  Summary Section (\`userDetails.summary\`):
-        *   Generate a concise (20-40 words) and powerful professional summary (elevator pitch).
+        *   Generate a concise (20-30 words) and powerful professional summary (elevator pitch).
         *   It should clearly state:
             *   Who you are: e.g., "Senior Software Engineer," "Cybersecurity Analyst," "Data Scientist." Align with the target role.
-            *   Key expertise/skills: Highlight 2-3 core technical competencies most relevant to the job using \`<strong>\` and \`</strong>\` HTML tags.
-            *   Major achievement(s) or value proposition: Briefly mention a key quantifiable achievement or how you deliver value (if a key achievement is highlighted here, also use \`<strong>\` and \`</strong>\` HTML tags).
-        *   This section is crucial if no cover letter is used.
     4.  Skills Section (\`skills\`):
         *   Categorize: Group skills logically (e.g., "Programming Languages," "Frameworks/Libraries," "Databases," "Cloud Platforms," "Tools," "Methodologies"). Limit to a maximum of four categories; aim for three if possible.
         *   Technical Focus: Prioritize hard technical skills.
@@ -82,10 +69,8 @@ Phase 2: Content Selection & Refinement (Adhering to Tech Resume Best Practices)
         *   If \`workPreference\` is provided in the input user data, copy it to the output. Otherwise, omit this field from the output.
 
 Phase 3: Output Generation
-    1.  HTML Bolding Mandate for Output: When generating the resume content for fields like \`userDetails.summary\`, and the \`description\` arrays within \`workExperience\` and \`projects\`, any text requiring bolding or emphasis MUST be enclosed in \`<strong>\` and \`</strong>\` HTML tags. Under no circumstances should markdown bolding (e.g., \`**text**\`) be used in the JSON output. This is critical for ensuring the output can be correctly rendered as HTML.
-    2.  Generate the Tailored Resume: Construct the resume in the specified structured JSON format, adhering to the bolding mandate above. The \`description\` fields within \`workExperience\` and \`projects\`, and the \`userDetails.summary\` field, will thus contain strings where strategic keywords, skills, and achievements are highlighted using \`<strong>...\</strong>\` as detailed in Phase 2.
     3.  Conciseness & Clarity: Ensure the language is clear, concise, professional, and free of jargon unless it's industry-standard and relevant to the job description. Avoid "fancy/flowery" language.
-    4.  ATS-Friendliness: The structured nature and keyword focus will inherently aid ATS compatibility. Ensure standard terminology. While \`<strong>\` tags are for visual emphasis when rendered as HTML, the core text must remain parseable and keyword-rich for ATS.
+    4.  ATS-Friendliness: The structured nature and keyword focus will inherently aid ATS compatibility. Ensure standard terminology. 
 
 Input Format Reminder:
 The input will be a single JSON string. This JSON string represents an object with two top-level keys:
@@ -114,7 +99,7 @@ The \`export\` keyword and comments shown below are for schema definition clarit
 // 	name: string;
 // 	email: string;
 // 	currentTitle?: string;
-// 	summary?: string; // To be generated/refined by AI. Strings may contain <strong> tags.
+// 	summary?: string; // To be generated/refined by AI. 
 // 	workPreference?: "Remote" | "Hybrid" | "On-site"; // Copied from input if present, otherwise omitted
 // 	github?: string;
 // 	linkedin?: string;
@@ -136,7 +121,7 @@ The \`export\` keyword and comments shown below are for schema definition clarit
 // 	startDate: string;
 // 	endDate?: string;
 // 	current: boolean;
-// 	description: string[]; // Array of impactful bullet points. Strings may contain <strong> tags.
+// 	description: string[]; // Array of impactful bullet points. 
 // 	technologies?: string[];
 // 	roleLevel:
 // 	| "Junior"
@@ -147,7 +132,9 @@ The \`export\` keyword and comments shown below are for schema definition clarit
 // 	| "Founder"
 // 	| "CTO";
 //	keywords: [string, string, string, string?];  // Important keywords that align with user skills and the job description
-// }
+//
+// 	live?: string //Only if the experience is freelance or self-employed.
+// 	}
 
 // interface Education {
 // 	degree: string;
@@ -169,7 +156,7 @@ The \`export\` keyword and comments shown below are for schema definition clarit
 
 // interface Project {
 // 	title: string;
-// 	description: [string, string, string, string?]; // Array of impactful bullet points. Strings may contain <strong> tags.
+// 	description: [string, string, string, string?]; // Array of impactful bullet points. 
 // 	startDate: string;
 // 	endDate?: string;
 // 	current: boolean;
@@ -189,5 +176,5 @@ The \`export\` keyword and comments shown below are for schema definition clarit
 // }
 \`\`\`
 
-By following these detailed guidelines, you will create a resume that is not only tailored but also strategically constructed to impress tech recruiters and hiring managers, and correctly formatted for HTML rendering of bolded text.
+By following these detailed guidelines, you will create a resume that is not only tailored but also strategically constructed to impress tech recruiters and hiring managers .
 `;

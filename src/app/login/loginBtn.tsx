@@ -64,8 +64,8 @@ export default function LoginBtn({
         displayName,
       });
 
-      if (data.resumeData) return (window.location.href = "/resume");
-      return (window.location.href = "/upload-resume");
+      if (data.resumeData) return (window.location.href = "/resume#job-description");
+      return (window.location.href = "/resume#upload-resume");
     } catch (e) {
       console.error("Authentication or data storage error:", e);
     } finally {

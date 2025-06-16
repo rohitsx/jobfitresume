@@ -183,7 +183,7 @@ typescriptinterface NewResumeData {
 interface UserDetails {
   name: string;
   summary: string;
-  number?: string;
+  number: string;
   email: string;
   country: string;
   github?: string;

@@ -65,9 +65,24 @@ export const GoBack = () => (
   <div className="flex justify-center mb-4 print:hidden ">
     <a
       href="/resume#job-description"
-      className="bg-white border border-gray-200 shadow-sm hover:bg-gray-200 text-grey-800  py-2 px-4 rounded cursor-pointer"
+      className="bg-white border border-gray-200 shadow-sm hover:bg-gray-100 text-grey-800  py-2 px-4 rounded cursor-pointer"
     >
       Go Back
     </a>
+  </div>
+);
+
+export const RecreateResume = ({
+  handleOnClick,
+}: {
+  handleOnClick: () => void;
+}) => (
+  <div className="flex justify-center mb-4 print:hidden ">
+    <button
+      onClick={handleOnClick}
+      className="bg-white border border-gray-200 shadow-sm hover:bg-gray-100 text-grey-800  py-2 px-4 rounded cursor-pointer"
+    >
+      Not happy with your resume? Create a new one.
+    </button>
   </div>
 );

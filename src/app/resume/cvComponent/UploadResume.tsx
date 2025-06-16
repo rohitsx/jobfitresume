@@ -75,6 +75,7 @@ export const UploadResume = () => {
 
         alert("PDF uploaded and parsed successfully!");
         setPdf(null);
+        window.location.href = "/resume#job-description";
       } else {
         setError("Upload Failed, Please Try Again");
       }

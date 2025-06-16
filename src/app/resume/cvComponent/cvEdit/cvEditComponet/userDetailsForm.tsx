@@ -16,11 +16,11 @@ export const UserDetailsForm = ({ userDetails }: UserDetailsFormProps) => {
           input={{ defaultValue: userDetails.name, path: [...path, "name"] }}
         />
       </FormField>
-      <FormField label="Current Title">
+      <FormField label="Number (with country code)">
         <InputText
           input={{
-            defaultValue: userDetails.currentTitle,
-            path: [...path, "currentTitle"],
+            defaultValue: userDetails.number,
+            path: [...path, "number"],
           }}
         />
       </FormField>
@@ -67,6 +67,14 @@ export const UserDetailsForm = ({ userDetails }: UserDetailsFormProps) => {
           input={{
             defaultValue: userDetails.website,
             path: [...path, "website"],
+          }}
+        />
+      </FormField>
+      <FormField label="Twitter (X)">
+        <InputText
+          input={{
+            defaultValue: userDetails.twitter,
+            path: [...path, "twitter"],
           }}
         />
       </FormField>

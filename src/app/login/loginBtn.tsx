@@ -56,7 +56,6 @@ export default function LoginBtn({
       }
 
       setUid(uid);
-      if (data.resumeData) setResumeData(data.resumeData);
 
       await onLoginClickAction({
         uid,
@@ -64,7 +63,10 @@ export default function LoginBtn({
         displayName,
       });
 
-      if (data.resumeData) return (window.location.href = "/resume#job-description");
+      if (data && data.resumeData) {
+        setResumeData(data.resumeData);
+        return (window.location.href = "/resume#job-description");
+      }
       return (window.location.href = "/resume#upload-resume");
     } catch (e) {
       console.error("Authentication or data storage error:", e);

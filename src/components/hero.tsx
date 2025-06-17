@@ -21,11 +21,11 @@ const HeroSection = () => {
               AI-Powered Resume Builder
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-gray-900">
-              Land Your{" "}
+              Land Job{" "}
               <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Dream Job
+                5X Faster With
               </span>{" "}
-              Faster
+              JobFit Resume
             </h1>
             <p className="text-lg text-gray-600 md:text-xl max-w-md">
               JobFit Resume uses Gemini and other leading AI models to instantly

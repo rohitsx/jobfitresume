@@ -13,7 +13,6 @@ import { useErrorStore } from "@/store/store.error";
 import { TierPopup } from "../resume/cvUtil/TierPopup";
 import { ErrorAlert } from "@/components/ErrorAlert";
 import { NewCvSkeleton } from "./newCv.components/NewCv.Skeleton";
-import { Jim_Nightshade } from "next/font/google";
 
 export default function Page() {
   const [newCv, setNewCv] = useState<NewResumeData>();
@@ -66,6 +65,9 @@ export default function Page() {
       );
 
       setNewCv(JSON.parse(localData).resume);
+    }
+    if (!jobDescription && !localData) {
+      setError("Error Proccesiing");
     } else CreateNewCv();
   }, []);
 
@@ -78,7 +80,10 @@ export default function Page() {
     <>
       {tierPopup && <TierPopup open={tierPopup} setOpen={setTierPopup} />}
       {!newCv ? (
-        <NewCvSkeleton />
+        <>
+          {error && <ErrorAlert err={error} />}
+          <NewCvSkeleton />
+        </>
       ) : (
         <div className="p-8 print:p-0">
           <div className="flex gap-2 justify-between">

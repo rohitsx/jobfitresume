@@ -16,7 +16,6 @@ export default async function Pricing() {
       <main>
         <PricingSection uid={uid} />
       </main>
-      <Footer />
     </>
   );
 }

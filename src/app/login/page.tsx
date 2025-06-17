@@ -32,7 +32,7 @@ export default async function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-purple-50 px-4 py-12">
+    <div className="min-h-screen bg-gray-50 px-4 py-12">
       <LoginBtn onLoginClickAction={handleAuth} />
     </div>
   );

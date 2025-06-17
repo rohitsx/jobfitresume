@@ -76,10 +76,10 @@ export default function LoginBtn({
   }, [onLoginClickAction]);
 
   return (
-    <div className="max-w-md w-full mx-auto bg-white rounded-xl mt-30 shadow-lg overflow-hidden p-8">
+    <div className="max-w-md w-full mx-auto bg-white rounded-xl mt-30 shadow-lg overflow-hidden p-8 ">
       <div className="space-y-6">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-800">Welcome Back</h2>
+          <h2 className="text-3xl font-bold text-gray-800">Welcome</h2>
           <p className="mt-2 text-gray-600">
             Sign in to access your account and continue your journey
           </p>
@@ -88,7 +88,7 @@ export default function LoginBtn({
         <button
           onClick={handleAuth}
           disabled={isLoading}
-          className="flex items-center justify-center w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition duration-200 font-medium"
+          className="flex items-center justify-center w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition duration-200 font-medium cursor-pointer"
         >
           {isLoading ? (
             <div className="flex items-center space-x-2">

@@ -3,13 +3,13 @@ import { GoogleGenAI } from "@google/genai";
 import { json } from "stream/consumers";
 
 export async function extractResumeData(text: string) {
-	const ai = new GoogleGenAI({
-		apiKey: env.geminiApiKey,
-	});
+  const ai = new GoogleGenAI({
+    apiKey: env.geminiApiKey,
+  });
 
-	const response = await ai.models.generateContent({
-		model: "gemini-1.5-flash-8b",
-		contents: `Extract structured data from the following resume text and return it as JSON that matches this TypeScript interface:
+  const response = await ai.models.generateContent({
+    model: "gemini-1.5-flash-8b",
+    contents: `Extract structured data from the following resume text and return it as JSON that matches this TypeScript interface:
 export interface WorkExperience {
   companyName: string;
   jobTitle: string;
@@ -83,6 +83,7 @@ export interface UserDetails {
   summary?: string;
   email: string;
   country: string;
+  number: string;
   workPreference?: "Remote" | "Hybrid" | "On-site";
   github?: string;
   linkedin?: string;
@@ -113,14 +114,14 @@ export interface ResumeData {
   Resume text:
   ${text}
   `,
-		config: {
-			responseMimeType: "application/json",
-		},
-	});
+    config: {
+      responseMimeType: "application/json",
+    },
+  });
 
-	if (!response.text) return "error parse resume";
+  if (!response.text) return "error parse resume";
 
-	console.log(response.text);
+  console.log(response.text);
 
-	return JSON.parse(response.text);
+  return JSON.parse(response.text);
 }

@@ -1,9 +1,9 @@
 "use client";
 
-import { getDbRef } from "@/lib/dbRef";
+import { getBetaDbRef } from "@/lib/dbRef";
 import { useHashStore } from "@/store/store.hash";
 import { useResumeStore } from "@/store/useResumeStore";
-import { get } from "firebase/database";
+import { get, set } from "firebase/database";
 import {
   LucideIcon,
   FileText,
@@ -11,6 +11,7 @@ import {
   Upload,
   ChevronRight,
 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface CvNavbarProps {
@@ -19,26 +20,46 @@ interface CvNavbarProps {
   Icon?: LucideIcon;
 }
 
-export const SideBar = ({ uid }: { uid: string }) => {
+export const SideBar = () => {
   const { setUid, setResumeData, resumeData } = useResumeStore();
   const { hash } = useHashStore();
+  const searchParams = useSearchParams();
 
   const [isOpen, setIsOpen] = useState(false);
 
+  console.log("working");
   useEffect(() => {
-    setUid(uid);
-    if (resumeData) return;
+    const uid = searchParams.get("id") || localStorage.getItem("betaUid");
+    const name = searchParams.get("name");
+    if (resumeData || !uid) return;
+
+    if (uid && name) localStorage.setItem("betaUid", uid);
+
     const getResumeData = async () => {
-      const dbRef = getDbRef(uid);
+      console.log(uid);
+      if (!uid) return;
+      setUid(uid);
+      const dbRef = getBetaDbRef(uid);
       const snapshot = await get(dbRef);
       const data = snapshot.val();
+
+      if (!data || !data.name) {
+        await set(dbRef, {
+          name,
+          tier: {
+            count: 0,
+            date: new Date().toISOString().split("T")[0],
+            type: "free",
+          },
+        });
+      }
       if (data) {
         setResumeData(data.resumeData);
       }
     };
 
     getResumeData();
-  }, [uid, resumeData, setResumeData, setUid]);
+  }, [resumeData, setResumeData]);
 
   const Btn = ({ url, value, Icon }: CvNavbarProps) => {
     let selected;

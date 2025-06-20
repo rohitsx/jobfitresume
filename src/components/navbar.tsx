@@ -173,7 +173,7 @@ export default function NavBar({ userData }: { userData: UserData }) {
 						Resume
 					</Link>
 					<Link
-						href="/beta/resume/#upload-resume"
+						href="/beta"
 						className="text-gray-600 hover:text-indigo-600 transition-colors"
 					>
 						Demo

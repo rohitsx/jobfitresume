@@ -49,7 +49,9 @@ export const CvEdit = () => {
 
 	if (!dataForEditor) {
 		return (
-			<div className="text-center p-8 text-lg ">Loading Resume Data...</div>
+			<div className="text-center p-8 text-lg ">
+				Data Not Found or Loading new Data...
+			</div>
 		);
 	}
 

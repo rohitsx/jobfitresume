@@ -1,6 +1,5 @@
 import env from "@/lib/env";
 import { GoogleGenAI } from "@google/genai";
-import { json } from "stream/consumers";
 
 export async function extractResumeData(text: string) {
   const ai = new GoogleGenAI({
@@ -8,7 +7,7 @@ export async function extractResumeData(text: string) {
   });
 
   const response = await ai.models.generateContent({
-    model: "gemini-1.5-flash-8b",
+    model: "gemini-2.5-flash",
     contents: `Extract structured data from the following resume text and return it as JSON that matches this TypeScript interface:
 export interface WorkExperience {
   companyName: string;

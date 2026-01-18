@@ -167,6 +167,12 @@ export default function NavBar({ userData }: { userData: UserData }) {
 						How It Works
 					</Link>
 					<Link
+						href="/pricing"
+						className="text-gray-600 hover:text-indigo-600 transition-colors"
+					>
+						Pricing
+					</Link>
+					<Link
 						href="/resume#job-description"
 						className="text-gray-600 hover:text-indigo-600 transition-colors"
 					>
@@ -176,7 +182,7 @@ export default function NavBar({ userData }: { userData: UserData }) {
 						href="/beta"
 						className="text-gray-600 hover:text-indigo-600 transition-colors"
 					>
-						Demo
+						Beta
 					</Link>
 				</div>
 
@@ -252,19 +258,26 @@ export default function NavBar({ userData }: { userData: UserData }) {
 							>
 								How It Works
 							</Link>
-							{/* <Link */}
-							{/* 	href="/#pricing" */}
-							{/* 	onClick={closeMobileMenu} */}
-							{/* 	className="text-gray-600 hover:text-indigo-600 transition-colors py-1" */}
-							{/* > */}
-							{/* 	Pricing */}
-							{/* </Link> */}
+							<Link
+								href="/pricing"
+								onClick={closeMobileMenu}
+								className="text-gray-600 hover:text-indigo-600 transition-colors py-1"
+							>
+								Pricing
+							</Link>
 							<Link
 								href="/resume"
 								onClick={closeMobileMenu}
 								className="text-gray-600 hover:text-indigo-600 transition-colors py-1"
 							>
 								Resume
+							</Link>
+							<Link
+								href="/beta"
+								onClick={closeMobileMenu}
+								className="text-gray-600 hover:text-indigo-600 transition-colors py-1"
+							>
+								Beta
 							</Link>
 						</div>
 						<hr className="border-gray-100" />

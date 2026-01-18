@@ -3,8 +3,9 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { getDbRef } from "@/lib/dbRef";
 import { get, update } from "firebase/database";
+import { dodoWebhookKey } from "@/lib/env";
 
-const webhook = new Webhook(process.env.DODO_WEBHOOK_KEY!);
+const webhook = new Webhook(dodoWebhookKey!);
 
 export async function POST(request: Request) {
   const headersList = headers();

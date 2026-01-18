@@ -12,11 +12,12 @@ export default async function LandingPage() {
   return (
     <>
       <NavBar userData={userData} />
-      <main className="flex-grow">
+      <main className="grow">
         <HeroSection />
         <FeaturesSection />
         <HowItWorksSection />
         <FaqSection />
+        <Footer />
       </main>
     </>
   );

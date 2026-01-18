@@ -1,18 +1,14 @@
-import env from "@/lib/env";
-import { GoogleGenAI } from "@google/genai";
+import { ai } from "@/lib/ai";
 
 export async function makeResume(contents: string) {
-  const ai = new GoogleGenAI({
-    apiKey: env.geminiApiKey,
-  });
-
-  console.log("making cv")
-
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents,
     config: {
       responseMimeType: "application/json",
+      thinkingConfig: {
+        thinkingBudget: 0,
+      },
     },
   });
 

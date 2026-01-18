@@ -4,22 +4,20 @@ import { SnapSection } from "../cvUtil/SnapSection";
 import { Loader2Icon, Upload, UploadCloud, UploadIcon } from "lucide-react";
 import { useState } from "react";
 import { useResumeStore } from "@/store/useResumeStore";
-import { getDbRef } from "@/lib/dbRef";
-import { update } from "firebase/database";
 
 export const UploadResume = () => {
   const [parseResume, setParseResume] = useState(false);
-  const [pdf, setPdf] = useState<File | null>(null);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
   const { setError } = useErrorStore();
   const [isDragging, setIsDragging] = useState(false);
-  const { uid, setResumeData } = useResumeStore();
+  const { setResumeData } = useResumeStore();
 
   const handleFileSelect = (file: File) => {
     if (file.type !== "application/pdf") {
       setError("Please select a valid PDF file.");
       return;
     }
-    setPdf(file);
+    setPdfFile(file);
     setError(null);
   };
 
@@ -49,39 +47,31 @@ export const UploadResume = () => {
   };
 
   const handleSubmit = async () => {
-    if (!pdf) return setError("Please select a PDF file first.");
+    if (!pdfFile) return setError("Please select a PDF file first.");
     setParseResume(true);
 
-    const formData = new FormData();
-    formData.append("pdf", pdf);
-
     try {
-      const res = await fetch("/api/upload-pdf", {
+      const formData = new FormData();
+      formData.append("pdf", pdfFile);
+
+      const response = await fetch("/api/upload-pdf", {
         method: "POST",
         body: formData,
       });
 
-      if (res.ok) {
-        const { resume } = await res.json();
-
-        if (!uid) return setError("Client Error. Please refresh the page.");
-
-        const dbRef = getDbRef(uid);
-        update(dbRef, {
-          resumeData: resume,
-        });
-
-        setResumeData(resume);
-
-        alert("PDF uploaded and parsed successfully!");
-        setPdf(null);
-        window.location.href = "/resume#job-description";
-      } else {
-        setError("Upload Failed, Please Try Again");
+      if (!response.ok) {
+        throw new Error("Failed to upload and parse PDF");
       }
+
+      const data = await response.json();
+      setResumeData(data.resume);
+
+      alert("PDF uploaded and parsed successfully!");
+      setPdfFile(null);
+      window.location.href = "/resume#job-description";
     } catch (err) {
       console.log(err);
-      setError("Somthing went wrong");
+      setError("Something went wrong");
     } finally {
       setParseResume(false);
     }
@@ -106,7 +96,9 @@ export const UploadResume = () => {
         >
           <UploadCloud className="w-10 h-10 mb-4 text-gray-400" />
           <p className="text-center font-medium">
-            {pdf ? `Selected: ${pdf.name}` : "Click or drag & drop PDF here"}
+            {pdfFile
+              ? `Selected: ${pdfFile.name}`
+              : "Click or drag & drop PDF here"}
           </p>
           <p className="text-sm text-gray-400">(Only .pdf files are allowed)</p>
 
@@ -120,7 +112,7 @@ export const UploadResume = () => {
         </div>
         <button
           className={`border border-gray-200 rounded-xl w-3/4 text-white p-3 shadow-lg hover:shadow-xl transition mx-auto flex justify-center items-center gap-2 cursor-pointer duration-300 ease-in-out ${
-            pdf ? "bg-indigo-600 " : "bg-indigo-500"
+            pdfFile ? "bg-indigo-600 " : "bg-indigo-500"
           }`}
           onClick={handleSubmit}
           disabled={parseResume}

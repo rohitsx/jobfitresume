@@ -7,7 +7,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog"; // Adjust this import path based on your project structure
+} from "@/components/ui/dialog";
 import { PlayCircle } from "lucide-react";
 
 const HeroSection = () => {
@@ -66,10 +66,10 @@ const HeroSection = () => {
 								</svg>
 							</a>
 							<a
-								href="#how-it-works"
+								href="/beta"
 								className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-indigo-600 hover:text-indigo-600 transition-all flex items-center justify-center gap-2 text-center"
 							>
-								See How It Works
+								Try Beta
 							</a>
 						</div>
 						{/* Added "No credit card required" below the buttons */}
@@ -95,14 +95,14 @@ const HeroSection = () => {
 						<Dialog>
 							<DialogTrigger asChild>
 								<div className="bg-white rounded-2xl shadow-2xl p-4 border border-gray-100 relative z-10 cursor-pointer group hover:scale-[1.01] transition-transform duration-200">
-									<div className="w-full h-64 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl flex items-center justify-center overflow-hidden relative">
+									<div className="w-full h-64 bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden relative">
 										<img
-											src="./1.png"
-											alt="Video Thumbnail"
-											className="absolute inset-0 w-full h-full object-cover rounded-xl"
+											src="https://img.youtube.com/vi/ruUl1iP9fH8/maxresdefault.jpg"
+											alt="JobFit Resume Demo"
+											className="absolute inset-0 w-full h-full object-cover z-0"
 										/>
-										<div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all rounded-xl">
-											<PlayCircle className="w-20 h-20 text-white opacity-80 group-hover:opacity-100 transition-opacity" />
+										<div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-all z-10">
+											<PlayCircle className="w-20 h-20 text-white opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
 										</div>
 									</div>
 									<p className="text-indigo-600 font-semibold text-center mt-4">

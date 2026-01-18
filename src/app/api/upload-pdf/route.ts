@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import pdf from "pdf-parse/lib/pdf-parse";
-import { extractResumeData } from "./extractResumeData";
+import { extractResumeData } from "@/app/action/upload-pdf/extractResumeData";
 
 export async function POST(req: NextRequest) {
 	try {

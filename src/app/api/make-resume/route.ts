@@ -11,15 +11,12 @@ export async function POST(req: NextRequest) {
 
   const dbRef = getDbRef(uid);
   const snapshot = await get(dbRef);
-  const {
-    tier,
-  }: {
-    tier: {
-      count: number;
-      date: string;
-      type: "free" | "Standard" | "Premium";
-    };
-  } = snapshot.val();
+  const val = snapshot.val();
+  const tier = val?.tier || {
+    count: 0,
+    date: todayDate,
+    type: "free",
+  };
 
   let tierCount = tier.count;
   new Date(todayDate) > new Date(tier.date) && (tierCount = 0);

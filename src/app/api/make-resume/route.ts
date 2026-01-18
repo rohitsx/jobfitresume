@@ -21,6 +21,10 @@ export async function POST(req: NextRequest) {
   let tierCount = tier.count;
   new Date(todayDate) > new Date(tier.date) && (tierCount = 0);
 
+
+
+      console.log("working")
+
   if (todayDate == tier.date) {
     if (tier.type === "free" && tier.count >= 3) {
       return NextResponse.json(

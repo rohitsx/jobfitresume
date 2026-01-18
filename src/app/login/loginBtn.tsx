@@ -56,6 +56,7 @@ export default function LoginBtn({
       }
 
       setUid(uid);
+      console.log({uid})
 
       await onLoginClickAction({
         uid,

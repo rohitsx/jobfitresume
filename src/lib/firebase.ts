@@ -2,14 +2,15 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAPgVqVX6HtgW6IOB9LaCODcUUYwq7t9-c",
-  authDomain: "jobfitresume-auth.firebaseapp.com",
-  projectId: "jobfitresume-auth",
-  storageBucket: "jobfitresume-auth.firebasestorage.app",
-  messagingSenderId: "92083094969",
-  appId: "1:92083094969:web:346017e7c98dcafc852268",
-  measurementId: "G-MNPWYB7800",
-  databaseURL: "https://jobfitresume-auth-default-rtdb.firebaseio.com",
+  apiKey: "AIzaSyDzBcpItmm51Pr6qaNVOC4cF65tt6M_Pm8",
+  authDomain: "jobfitresume0.firebaseapp.com",
+  projectId: "jobfitresume0",
+  storageBucket: "jobfitresume0.firebasestorage.app",
+  messagingSenderId: "439316927747",
+  appId: "1:439316927747:web:c2813e3d08a65cd8114536",
+  measurementId: "G-N8VMWK8Z1G",
+  databaseURL: "https://jobfitresume0-default-rtdb.asia-southeast1.firebasedatabase.app/"
+
 };
 
 const app = initializeApp(firebaseConfig);
